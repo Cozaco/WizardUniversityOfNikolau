@@ -1,16 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "r2alVGNzVtGeV5CT2YZ1GPEkpJ3Lqz/5w7GMRnilCQ4De5qJOZ403qJyfqy+70HfpcWZ603+RdCR3pU53ZRf+w==",
+  "dgSpecHash": "mI5ptBSzrxtKHoPo81+ixtrkdfb/t6i7Bpj7UtEB5zUPvHFswzn9dAGEKi8xCnfwSQmZEsYA70pVuAdQ5a5NFw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj",
+  "projectFilePath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\npgsql\\8.0.1\\npgsql.8.0.1.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.0\\system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
-    "C:\\Users\\USER\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"
+    "C:\\Users\\loren\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\loren\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\loren\\.nuget\\packages\\npgsql\\8.0.1\\npgsql.8.0.1.nupkg.sha512",
+    "C:\\Users\\loren\\.nuget\\packages\\system.diagnostics.diagnosticsource\\8.0.0\\system.diagnostics.diagnosticsource.8.0.0.nupkg.sha512",
+    "C:\\Users\\loren\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\loren\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
+    "C:\\Users\\loren\\.nuget\\packages\\system.text.json\\8.0.0\\system.text.json.8.0.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -436,24 +436,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\USER\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\loren\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj",
+      "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj",
       "projectName": "WizardUniversityOfNikolaus",
-      "projectPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj",
-      "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\obj\\",
+      "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj",
+      "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -500,7 +495,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }

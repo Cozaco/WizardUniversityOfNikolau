@@ -8,5 +8,13 @@ namespace Contracts.Models
 {
     public class Materia
     {
+        private int id;
+        private string nombre;
+
+        public Materia()
+        {
+
+        }
+
     }
 }

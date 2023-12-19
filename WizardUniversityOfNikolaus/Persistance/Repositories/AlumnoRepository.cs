@@ -22,7 +22,7 @@ namespace Persistance.Repositories
         {
             
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos (nombre,edad) VALUES ('{alumno.GetNombre()}',{alumno.GetEdad()}) RETURNING id");
-            int? resultadoComando=(int?)command.ExecuteScalar();
+            int? resultadoComando=(int?)await command.ExecuteScalarAsync();
             if ( resultadoComando == null )
             {
                 throw new Exception("No se pudo agregar alumno");
@@ -55,7 +55,7 @@ namespace Persistance.Repositories
         public async Task<bool> UpdateAsync(Alumno alumno) //alumno con el update HECHO
         {
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.alumnos SET nombre = '{alumno.GetNombre()}', edad = {alumno.GetEdad()} WHERE id = {alumno.GetId()}");
-            int resultadoComando = command.ExecuteNonQuery(); // hace la query y no devuelve nada
+            int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
             {
                 throw new Exception("Error al actualizar el alumno");

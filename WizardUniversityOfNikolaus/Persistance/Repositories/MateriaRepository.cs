@@ -17,19 +17,58 @@ namespace Persistance.Repositories
         {
             this.dataSource = dataSource;
         }
-        public Task CrearAsync(Materia materia)
+        public async Task CrearAsync(Materia materia)
         {
-            throw new NotImplementedException();
+
+            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.materias (nombre, comision) VALUES ('{materia.GetNombre()}', {materia.GetComision()}) RETURNING id");
+            int? resultadoComando = (int?) await command.ExecuteScalarAsync();
+            if (resultadoComando == null)
+            {
+                throw new Exception("No se pudo agregar materia");
+
+            }
+            materia.SetId(resultadoComando.Value);
+            return;
         }
 
-        public Task<bool> DeleteAsync(int idMateria)
+        public async Task<bool> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.materias WHERE materias.id = {id}");
+            int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
+            Console.WriteLine(resultadoComando);
+            if (resultadoComando == -1)
+            {
+                throw new Exception("Error al eliminar el materias");
+            }
+            if (resultadoComando > 1)
+            {
+                throw new Exception("F");
+            }
+            if (resultadoComando == 0)
+            {
+                return false; // no se borró ninguna materia
+            }
+            return true; //se borró exitosamente una materia
         }
 
-        public Task<bool> UpdateAsync(Materia materia)
+        public async Task<bool> UpdateAsync(Materia materia) //materia con el update HECHO
         {
-            throw new NotImplementedException();
+            using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.materias SET nombre = '{materia.GetNombre()}', comision = {materia.GetComision()} WHERE id = {materia.GetId()}");
+            int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
+            if (resultadoComando == -1)
+            {
+                throw new Exception("Error al actualizar la materia");
+            }
+            if (resultadoComando > 1)
+            {
+                throw new Exception("F");
+            }
+            if (resultadoComando == 0)
+            {
+                return false; // no se actualizo materia
+            }
+            return true; //se actualizo exitosamente una materia
+
         }
     }
 }

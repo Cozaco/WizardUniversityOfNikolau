@@ -12,9 +12,9 @@ namespace WizardUniversityOfNikolaus
         {
             DataBase tabla = DataBase.GetInstance();
 
-            Alumno lolo = new Alumno("Lolo", 80, 1);
+            Materia sae = new Materia("Biologia", 1);
 
-            await DataBase.alumnoRepository.UpdateAsync(lolo);
+            await DataBase.materiaRepository.CrearAsync(sae);
 
         }
     }

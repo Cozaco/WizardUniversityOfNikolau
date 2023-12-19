@@ -1,4 +1,5 @@
-﻿using Contracts.Repositories;
+﻿using Contracts.Models;
+using Contracts.Repositories;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,21 @@ namespace Persistance.Repositories
         public ProfesorRepository(NpgsqlDataSource dataSource)
         {
             this.dataSource = dataSource;
+        }
+
+        public Task CrearAsync(Profesor profesor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAsync(int idProfesor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateAsync(Profesor profesor)
+        {
+            throw new NotImplementedException();
         }
     }
 }

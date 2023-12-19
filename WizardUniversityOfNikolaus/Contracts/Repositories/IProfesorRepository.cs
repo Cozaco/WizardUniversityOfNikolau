@@ -10,8 +10,8 @@ namespace Contracts.Repositories
     public interface IProfesorRepository
     {
         public Task CrearAsync(Profesor profesor);
-        public Task DeleteAsync(Profesor profesor);
+        public Task<bool> DeleteAsync(int idProfesor);
 
-        public Task UpdateAsync(Profesor profesor);
+        public Task<bool> UpdateAsync(Profesor profesor);
     }
 }

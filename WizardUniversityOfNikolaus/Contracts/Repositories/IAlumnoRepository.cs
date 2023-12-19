@@ -11,9 +11,9 @@ namespace Contracts.Repositories
     {
         public Task CrearAsync(Alumno alumno);
         
-        public Task DeleteAsync(Alumno alumno);
+        public Task<bool> DeleteAsync(int id);
+
+        public Task<bool> UpdateAsync(Alumno alumno);
         
-        public Task UpdateAsync(Alumno alumno);
-       
     }
 }

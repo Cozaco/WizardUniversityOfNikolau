@@ -1,4 +1,5 @@
-﻿using Contracts.Repositories;
+﻿using Contracts.Models;
+using Contracts.Repositories;
 using Npgsql;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,20 @@ namespace Persistance.Repositories
         public MateriaRepository(NpgsqlDataSource dataSource)
         {
             this.dataSource = dataSource;
+        }
+        public Task CrearAsync(Materia materia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeleteAsync(int idMateria)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> UpdateAsync(Materia materia)
+        {
+            throw new NotImplementedException();
         }
     }
 }

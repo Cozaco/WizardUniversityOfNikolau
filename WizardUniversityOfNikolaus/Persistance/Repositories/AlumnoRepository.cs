@@ -21,7 +21,7 @@ namespace Persistance.Repositories
         public async Task CrearAsync(Alumno alumno)
         {
             
-            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidad.alumnos (nombre,edad) VALUES ('{alumno.GetNombre()}',{alumno.GetEdad()}) RETURNING id");
+            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos (nombre,edad) VALUES ('{alumno.GetNombre()}',{alumno.GetEdad()}) RETURNING id");
             int? resultadoComando=(int?)command.ExecuteScalar();
             if ( resultadoComando == null )
             {
@@ -32,13 +32,18 @@ namespace Persistance.Repositories
             return;
         }
 
-        public async Task<bool> DeleteAsync(Alumno alumno)
+        public async Task<bool> DeleteAsync(int id)
         {
-            using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidad.alumnos WHERE alumno.id = {alumno.GetId()}");
-            int resultadoComando = command.ExecuteNonQuery(); // hace la query y no devuelve nada
+            await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.alumnos WHERE alumnos.id = {id}");
+            int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
+            Console.WriteLine(resultadoComando);
             if (resultadoComando == -1)
             {
                 throw new Exception("Error al eliminar el alumno");
+            }
+            if (resultadoComando > 1)
+            {
+                throw new Exception("F");
             }
             if (resultadoComando == 0)
             {
@@ -49,11 +54,15 @@ namespace Persistance.Repositories
 
         public async Task<bool> UpdateAsync(Alumno alumno) //alumno con el update HECHO
         {
-            using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidad.alumnos SET (nombre, edad) VALUES ('{alumno.GetNombre()}',{alumno.GetEdad()}) WHERE alumno.id = {alumno.GetId()}");
+            using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.alumnos SET nombre = '{alumno.GetNombre()}', edad = {alumno.GetEdad()} WHERE id = {alumno.GetId()}");
             int resultadoComando = command.ExecuteNonQuery(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
             {
                 throw new Exception("Error al actualizar el alumno");
+            }
+            if (resultadoComando > 1)
+            {
+                throw new Exception("F");
             }
             if (resultadoComando == 0)
             {

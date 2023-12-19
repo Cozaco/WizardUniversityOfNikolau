@@ -9,8 +9,10 @@ namespace Contracts.Repositories
 {
     public interface IProfesorDaRepository
     {
-        public Task ConocerProfesoresAsync(Materia materia);
-        public Task ConocerMateriasAsync(Profesor profesor);
-        public Task ConocerAlumnos(Profesor profesor);
+        public Task ConocerProfdeMateriaAsync(int idMateria);
+        public Task ConocerMateriasAsync(int idProfesor);
+        public Task ConocerAlumnosdeProfesorAsync(int idProfesor);
+
+        public Task ContratarProfesorenMateriaAsync(int idProfesor, int idMateria);
     }
 }

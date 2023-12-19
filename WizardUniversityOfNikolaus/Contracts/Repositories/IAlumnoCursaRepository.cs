@@ -9,14 +9,12 @@ namespace Contracts.Repositories
 {
     public interface IAlumnoCursaRepository
     {
-        public Task RecibirAlumnoAsync(Alumno alumno, Materia materia);
+        public Task ConocerAlumnosAsync(int idMateria);
 
-        public Task ConocerAlumnosAsync(Materia materia);
+        public Task InscribirAMateriaAsync(int idAlumnos, int idMateria);
 
-        public Task InscribirAMateriaAsync(Alumno alumno, Materia materia);
+        public Task ConocerMateriasAsync(int idAlumno);
 
-        public Task ConocerMateriasAsync(Alumno alumno);
-
-        public Task ConocerProfesoresAsync(Alumno alumno);
+        public Task ConocerProfdeAlumnoAsync(int idAlumno);
     }
 }

@@ -10,7 +10,7 @@ namespace Contracts.Repositories
     public interface IMateriaRepository
     {
         public Task CrearAsync(Materia materia);
-        public Task DeleteAsync(Materia materia);
-        public Task UpdateAsync(Materia materia);
+        public Task<bool> DeleteAsync(int idMateria);
+        public Task<bool> UpdateAsync(Materia materia);
     }
 }

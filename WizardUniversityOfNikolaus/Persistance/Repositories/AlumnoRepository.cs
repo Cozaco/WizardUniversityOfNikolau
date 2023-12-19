@@ -18,10 +18,10 @@ namespace Persistance.Repositories
             this.dataSource = dataSource;
         }
 
-        public Task CrearAsync(Alumno alumno)
+        public async Task CrearAsync(Alumno alumno)
         {
             
-            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidad.materias (nombre,edad) VALUES ('{alumno.GetNombre()}','{alumno.GetEdad()}') RETURNING id");
+            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidad.alumnos (nombre,edad) VALUES ('{alumno.GetNombre()}',{alumno.GetEdad()}) RETURNING id");
             int? resultadoComando=(int?)command.ExecuteScalar();
             if ( resultadoComando == null )
             {
@@ -29,17 +29,38 @@ namespace Persistance.Repositories
 
             }
             alumno.SetId(resultadoComando.Value);
-            return Task.CompletedTask;
+            return;
         }
 
-        public Task DeleteAsync(Alumno alumno)
+        public async Task<bool> DeleteAsync(Alumno alumno)
         {
-            throw new NotImplementedException();
+            using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidad.alumnos WHERE alumno.id = {alumno.GetId()}");
+            int resultadoComando = command.ExecuteNonQuery(); // hace la query y no devuelve nada
+            if (resultadoComando == -1)
+            {
+                throw new Exception("Error al eliminar el alumno");
+            }
+            if (resultadoComando == 0)
+            {
+                return false; // no se borró ningún alumnos
+            }
+            return true; //se borró exitosamente un alumno
         }
 
-        public Task UpdateAsync(Alumno alumno)
+        public async Task<bool> UpdateAsync(Alumno alumno) //alumno con el update HECHO
         {
-            throw new NotImplementedException();
+            using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidad.alumnos SET (nombre, edad) VALUES ('{alumno.GetNombre()}',{alumno.GetEdad()}) WHERE alumno.id = {alumno.GetId()}");
+            int resultadoComando = command.ExecuteNonQuery(); // hace la query y no devuelve nada
+            if (resultadoComando == -1)
+            {
+                throw new Exception("Error al actualizar el alumno");
+            }
+            if (resultadoComando == 0)
+            {
+                return false; // no se borró ningún alumnos
+            }
+            return true; //se borró exitosamente un alumno
+
         }
     }
 }

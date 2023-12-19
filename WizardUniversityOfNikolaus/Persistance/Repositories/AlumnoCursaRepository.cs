@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Persistance.Repositories
 {
-    internal class AlumnoCursaRepository
+    public class AlumnoCursaRepository
     {
     }
 }

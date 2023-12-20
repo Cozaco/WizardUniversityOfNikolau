@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj": {}
+    "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj": {}
   },
   "projects": {
-    "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
+    "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj",
-        "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\obj\\",
+        "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -61,21 +61,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj": {
+    "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj",
+        "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj",
         "projectName": "Persistance",
-        "projectPath": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj",
-        "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\obj\\",
+        "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj",
+        "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -89,8 +89,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
-                "projectPath": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj"
+              "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
+                "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -126,21 +126,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj": {
+    "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj",
+        "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj",
         "projectName": "WizardUniversityOfNikolaus",
-        "projectPath": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj",
-        "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\obj\\",
+        "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus.csproj",
+        "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\WizardUniversityOfNikolaus\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -154,8 +154,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj": {
-                "projectPath": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj"
+              "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj": {
+                "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj"
               }
             }
           }
@@ -191,7 +191,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

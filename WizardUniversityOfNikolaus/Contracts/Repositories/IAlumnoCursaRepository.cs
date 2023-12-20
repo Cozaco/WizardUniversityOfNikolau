@@ -11,7 +11,7 @@ namespace Contracts.Repositories
     {
         public Task ConocerAlumnosAsync(int idMateria);
 
-        public Task InscribirAMateriaAsync(int idAlumnos, int idMateria);
+        public Task<AlumnoCursa?> InscribirAMateriaAsync(int idAlumno,int idMateria);
 
         public Task ConocerMateriasAsync(int idAlumno);
 

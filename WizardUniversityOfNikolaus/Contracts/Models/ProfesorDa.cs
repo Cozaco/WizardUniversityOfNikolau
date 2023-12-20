@@ -6,10 +6,16 @@ using System.Threading.Tasks;
 
 namespace Contracts.Models
 {
-    internal class ProfesorDa
+    public class ProfesorDa
     {
         private int idProfesor;
         private int idMateria;
+
+        public ProfesorDa(int idProfesor, int idMateria)
+        {
+            this.idProfesor = idProfesor;
+            this.idMateria = idMateria;
+        }
 
         public int GetIdProfesor()
         {

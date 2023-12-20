@@ -13,6 +13,6 @@ namespace Contracts.Repositories
         public Task ConocerMateriasAsync(int idProfesor);
         public Task ConocerAlumnosdeProfesorAsync(int idProfesor);
 
-        public Task ContratarProfesorenMateriaAsync(int idProfesor, int idMateria);
+        public Task<ProfesorDa?> ContratarProfesorEnMateriaAsync(int idProfesor, int idMateria);
     }
 }

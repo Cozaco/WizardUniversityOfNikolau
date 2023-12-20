@@ -11,6 +11,12 @@ namespace Contracts.Models
         private int idAlumno;
         private int idMateria;
 
+        public AlumnoCursa(int idAlumno, int idMateria)
+        {
+            this.idAlumno = idAlumno;
+            this.idMateria = idMateria;
+        }
+
         public int GetIdAlumno()
         {
             return idAlumno;

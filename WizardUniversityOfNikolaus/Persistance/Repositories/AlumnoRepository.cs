@@ -18,7 +18,7 @@ namespace Persistance.Repositories
             this.dataSource = dataSource;
         }
 
-        public async Task CrearAsync(Alumno alumno)
+        public async Task CrearAsync(Profesor alumno)
         {
             
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos (nombre,edad) VALUES ('{alumno.GetNombre()}',{alumno.GetEdad()}) RETURNING id");
@@ -52,7 +52,7 @@ namespace Persistance.Repositories
             return true; //se borró exitosamente un alumno
         }
 
-        public async Task<bool> UpdateAsync(Alumno alumno) //alumno con el update HECHO
+        public async Task<bool> UpdateAsync(Profesor alumno) //alumno con el update HECHO
         {
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.alumnos SET nombre = '{alumno.GetNombre()}', edad = {alumno.GetEdad()} WHERE id = {alumno.GetId()}");
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada

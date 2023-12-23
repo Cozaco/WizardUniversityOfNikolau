@@ -20,7 +20,10 @@ namespace Persistance.Repositories
         public async Task CrearAsync(Materia materia)
         {
 
-            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.materias (nombre, comision) VALUES ('{materia.GetNombre()}', {materia.GetComision()}) RETURNING id");
+            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.materias (nombre, comision)" +
+                                                                   $" VALUES ('{materia.GetNombre()}', {materia.GetComision()}) " +
+                                                                   $"RETURNING id");
+            
             int? resultadoComando = (int?) await command.ExecuteScalarAsync();
             if (resultadoComando == null)
             {
@@ -33,7 +36,9 @@ namespace Persistance.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.materias WHERE materias.id = {id}");
+            await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.materias " +
+                                                                         $"WHERE materias.id = {id}");
+            
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             Console.WriteLine(resultadoComando);
             if (resultadoComando == -1)
@@ -53,7 +58,10 @@ namespace Persistance.Repositories
 
         public async Task<bool> UpdateAsync(Materia materia) //materia con el update HECHO
         {
-            using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.materias SET nombre = '{materia.GetNombre()}', comision = {materia.GetComision()} WHERE id = {materia.GetId()}");
+            using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.materias " +
+                                                                   $"SET nombre = '{materia.GetNombre()}', comision = {materia.GetComision()}" +
+                                                                   $" WHERE id = {materia.GetId()}");
+            
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
             {
@@ -69,6 +77,50 @@ namespace Persistance.Repositories
             }
             return true; //se actualizo exitosamente una materia
 
+        }
+
+        public async Task MateriasDeAlumnoAsync(int idAlumno)
+        {
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT materias.id,materias.nombre " +
+                                                                        $"FROM universidadnikolay.materias " +
+                                                                        $"JOIN universidadnikolay.alumnos_cursan " +
+                                                                        $"ON materias.id=alumnos_cursan.materia_id " +
+                                                                        $"WHERE alumnos_cursan.alumno_id={idAlumno}");
+            
+            using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            List<Materia> materiasQueCursa = new List<Materia>();
+            while (reader.Read())
+            {
+                Materia materia = new Materia(reader.GetString(1), reader.GetInt32(0));
+                materiasQueCursa.Add(materia);
+            }
+            foreach (Materia materia in materiasQueCursa)
+            {
+                Console.WriteLine($"ID:{materia.GetId()}");
+                Console.WriteLine($"Nombre:{materia.GetNombre()}");
+            }
+        }
+
+        public async Task MateriasDeProfesorAsync(int idProfesor)
+        {
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT materias.id,materias.nombre " +
+                                                                        $"FROM universidadnikolay.materias " +
+                                                                        $"JOIN universidadnikolay.profesores_dictan " +
+                                                                        $"ON materias.id=profesores_dictan.materia_id " +
+                                                                        $"WHERE profesores_dictan.profesor_id={idProfesor}");
+            
+            using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            List<Materia> materiasQueCursa = new List<Materia>();
+            while (reader.Read())
+            {
+                Materia materia = new Materia(reader.GetString(1), reader.GetInt32(0));
+                materiasQueCursa.Add(materia);
+            }
+            foreach (Materia materia in materiasQueCursa)
+            {
+                Console.WriteLine($"ID:{materia.GetId()}");
+                Console.WriteLine($"Nombre:{materia.GetNombre()}");
+            }
         }
     }
 }

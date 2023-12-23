@@ -18,10 +18,13 @@ namespace Persistance.Repositories
             this.dataSource = dataSource;
         }
 
-        public async Task CrearAsync(Profesor alumno)
+        public async Task CrearAsync(Alumno alumno)
         {
             
-            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos (nombre,edad) VALUES ('{alumno.GetNombre()}',{alumno.GetEdad()}) RETURNING id");
+            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos (nombre,edad) " +
+                                                                   $"VALUES ('{alumno.GetNombre()}',{alumno.GetEdad()}) " +
+                                                                   $"RETURNING id");
+            
             int? resultadoComando=(int?)await command.ExecuteScalarAsync();
             if ( resultadoComando == null )
             {
@@ -34,7 +37,9 @@ namespace Persistance.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.alumnos WHERE alumnos.id = {id}");
+            await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.alumnos " +
+                                                                         $"WHERE alumnos.id = {id}");
+            
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             Console.WriteLine(resultadoComando);
             if (resultadoComando == -1)
@@ -52,9 +57,12 @@ namespace Persistance.Repositories
             return true; //se borró exitosamente un alumno
         }
 
-        public async Task<bool> UpdateAsync(Profesor alumno) //alumno con el update HECHO
+        public async Task<bool> UpdateAsync(Alumno alumno) //alumno con el update HECHO
         {
-            using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.alumnos SET nombre = '{alumno.GetNombre()}', edad = {alumno.GetEdad()} WHERE id = {alumno.GetId()}");
+            using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.alumnos " +
+                                                                   $"SET nombre = '{alumno.GetNombre()}', edad = {alumno.GetEdad()} " +
+                                                                   $"WHERE id = {alumno.GetId()}");
+            
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
             {
@@ -69,7 +77,74 @@ namespace Persistance.Repositories
                 return false; // no se borró ningún alumnos
             }
             return true; //se borró exitosamente un alumno
+        }
+        public async Task AlumnosEnLaMateriaAsync(int idMateria)
+        {
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT alumnos.id,alumnos.nombre,alumnos.edad " +
+                                                                        $"FROM universidadnikolay.alumnos " +
+                                                                        $"JOIN universidadnikolay.alumnos_cursan " +
+                                                                        $"ON alumnos.id=alumnos_cursan.alumno_id " +
+                                                                        $"WHERE alumnos_cursan.materia_id={idMateria}");
+            
+            using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            List<Profesor> alumnosEnLaMateria = new List<Profesor>();
+            while (reader.Read())
+            {
+                Profesor alumno = new Profesor(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
+                alumnosEnLaMateria.Add(alumno);
+            }
+            foreach (Profesor alumno in alumnosEnLaMateria)
+            {
+                Console.WriteLine($"ID:{alumno.GetId()}");
+                Console.WriteLine($"Nombre:{alumno.GetNombre()}");
+                Console.WriteLine($"Nombre:{alumno.GetEdad()}");
+            }
+        }
 
+        public async Task AlumnosDeProfesorAsync(int idProfesor)
+        {
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT alumnos.id,alumnos.nombre " +
+                                                                        $"FROM universidadnikolay.alumnos " +
+                                                                        $"JOIN universidadnikolay.alumnos_cursan " +
+                                                                        $"ON alumnos.id=alumnos_cursan.alumno_id " +
+                                                                        $"JOIN universidadnikolay.profesores_dictan " +
+                                                                        $"ON profesores_dictan.materia_id=alumnos_cursan.materia_id " +
+                                                                        $"WHERE profesores_dictan.profesor_id={idProfesor}");
+            
+            using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            List<Profesor> alumnos = new List<Profesor>();
+            while (reader.Read())
+            {
+                Profesor alumno = new Profesor(reader.GetString(1), reader.GetInt32(0));
+                alumnos.Add(alumno);
+            }
+            foreach (Profesor profesor in alumnos)
+            {
+                Console.WriteLine($"ID:{profesor.GetId()}");
+                Console.WriteLine($"Nombre:{profesor.GetNombre()}");
+            }
+        }
+
+        public async Task<bool> InscribirAMateriaAsync(int idAlumno, int idMateria)
+        {
+            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos_cursan " +
+                                                                   $"VALUES ({idAlumno},{idMateria}) RETURNING id");
+            
+            int? resultadoComando = await command.ExecuteNonQueryAsync();
+            if (resultadoComando == -1)
+            {
+                throw new Exception("No se pudo inscribir al alumno");
+
+            }
+            if (resultadoComando > 1)
+            {
+                throw new Exception("F");
+            }
+            if (resultadoComando == 0)
+            {
+                return false; // no se inscribió ningún alumno
+            }
+            return true;
         }
     }
 }

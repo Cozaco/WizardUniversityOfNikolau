@@ -13,5 +13,11 @@ namespace Contracts.Repositories
         public Task<bool> DeleteAsync(int idProfesor);
 
         public Task<bool> UpdateAsync(Profesor profesor);
+
+        public Task ProfesoresDeAlumnoAsync(int idAlumno);
+
+        public Task ProfesoresDeMateriaAsync(int idMateria);
+
+        public Task<bool> AsingnarAMateriaAsync(int idProfesor, int idMateria);
     }
 }

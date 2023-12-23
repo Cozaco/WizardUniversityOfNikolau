@@ -21,7 +21,10 @@ namespace Persistance.Repositories
         public async Task CrearAsync(Profesor profesor)
         {
 
-            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.profesores (nombre,edad) VALUES ('{profesor.GetNombre()}',{profesor.GetEdad()}) RETURNING id");
+            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.profesores (nombre,edad) " +
+                                                                   $"VALUES ('{profesor.GetNombre()}',{profesor.GetEdad()}) " +
+                                                                   $"RETURNING id");
+            
             int? resultadoComando = (int?) await command.ExecuteScalarAsync();
             if (resultadoComando == null)
             {
@@ -34,7 +37,9 @@ namespace Persistance.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.profesores WHERE profesores.id = {id}");
+            await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.profesores" +
+                                                                         $" WHERE profesores.id = {id}");
+            
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             Console.WriteLine(resultadoComando);
             if (resultadoComando == -1)
@@ -54,7 +59,10 @@ namespace Persistance.Repositories
 
         public async Task<bool> UpdateAsync(Profesor profesor) //alumno con el update HECHO
         {
-            using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.profesores SET nombre = '{profesor.GetNombre()}', edad = {profesor.GetEdad()} WHERE id = {profesor.GetId()}");
+            using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.profesores " +
+                                                                   $"SET nombre = '{profesor.GetNombre()}', edad = {profesor.GetEdad()}" +
+                                                                   $" WHERE id = {profesor.GetId()}");
+            
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
             {
@@ -69,7 +77,74 @@ namespace Persistance.Repositories
                 return false; // no se actualizo profesor
             }
             return true; //se actualizo exitosamente un profesor
-
         }
+
+        public async Task ProfesoresDeAlumnoAsync(int idAlumno)
+        {
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT profesores.id,profesores.nombre " +
+                                                                        $"FROM universidadnikolay.profesores " +
+                                                                        $"JOIN universidadnikolay.profesores_dictan " +
+                                                                        $"ON profesores.id=profesores_dictan.profesor_id " +
+                                                                        $"JOIN universidadnikolay.alumnos_cursan " +
+                                                                        $"ON profesores_dictan.materia_id=alumnos_cursan.materia_id " +
+                                                                        $"WHERE alumnos_cursan.alumno_id={idAlumno}");
+
+            using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            List<Profesor> profesores = new List<Profesor>();
+            while (reader.Read())
+            {
+                Profesor profesor = new Profesor(reader.GetString(1), reader.GetInt32(0));
+                profesores.Add(profesor);
+            }
+            foreach (Profesor profesor in profesores)
+            {
+                Console.WriteLine($"ID:{profesor.GetId()}");
+                Console.WriteLine($"Nombre:{profesor.GetNombre()}");
+            }
+        }
+
+        public async Task ProfesoresDeMateriaAsync(int idMateria)
+        {
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT profesores.id,profesores.nombre,profesores.edad " +
+                                                                        $"FROM universidadnikolay.profesores " +
+                                                                        $"JOIN universidadnikolay.profesores_dictan " +
+                                                                        $"ON profesores.id=profesores_dictan.profesor_id " +
+                                                                        $"WHERE profesores_dictan.materia_id={idMateria}");
+
+            using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            List<Profesor> profesoresEnLaMateria = new List<Profesor>();
+            while (reader.Read())
+            {
+                Profesor profesor = new Profesor(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
+                profesoresEnLaMateria.Add(profesor);
+            }
+            foreach (Profesor profesor in profesoresEnLaMateria)
+            {
+                Console.WriteLine($"ID:{profesor.GetId()}");
+                Console.WriteLine($"Nombre:{profesor.GetNombre()}");
+                Console.WriteLine($"Nombre:{profesor.GetEdad()}");
+            }
+        }
+
+        public async Task<bool> AsingnarAMateriaAsync(int idProfesor, int idMateria)
+        {
+            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.profesores_dictan VALUES ({idProfesor},{idMateria}) RETURNING id");
+            int? resultadoComando = await command.ExecuteNonQueryAsync();
+            if (resultadoComando == -1)
+            {
+                throw new Exception("No se pudo contratar al profesor");
+
+            }
+            if (resultadoComando > 1)
+            {
+                throw new Exception("F");
+            }
+            if (resultadoComando == 0)
+            {
+                return false; // no se contrató a nadie
+            }
+            return true;
+        }
+
     }
 }

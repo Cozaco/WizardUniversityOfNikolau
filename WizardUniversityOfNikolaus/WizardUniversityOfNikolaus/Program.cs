@@ -3,6 +3,7 @@ using Npgsql;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography.X509Certificates;
 using Contracts.Models;
+using Service;
 
 namespace WizardUniversityOfNikolaus
 {

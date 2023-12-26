@@ -19,7 +19,7 @@ namespace Contracts.Repositories
 
         public Task AlumnosDeProfesorAsync(int idProfesor);
 
-        public Task<int> CountMateriasAsync(int idAlumno);
+        public Task<long> CountMateriasAsync(int idAlumno);
 
         public Task<bool> InsertAlumnoEnMateriaAsync(int idAlumno, int idMateria);
 

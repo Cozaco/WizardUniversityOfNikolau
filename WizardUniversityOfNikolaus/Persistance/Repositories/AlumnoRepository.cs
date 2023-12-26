@@ -32,7 +32,7 @@ namespace Persistance.Repositories
                 throw new Exception("No se pudo agregar alumno");
 
             }
-            alumno.SetId(resultadoComando.Value);
+            alumno.Id = resultadoComando.Value;
             return;
         }
 
@@ -126,12 +126,12 @@ namespace Persistance.Repositories
             }
         }
 
-        public async Task<int> CountMateriasAsync(int idAlumno)
+        public async Task<long> CountMateriasAsync(int idAlumno)
         {
-            await using NpgsqlCommand chequeoQuery = dataSource.CreateCommand($"SELECT COUNT (id_alumno) " +
-                                                                          $"FROM universidadnikolay.alumnos_cursan " +
-                                                                          $"WHERE id_alumno={idAlumno}");
-            int? resultadoQuery = (int?) chequeoQuery.ExecuteScalar();
+            await using NpgsqlCommand chequeoQuery = dataSource.CreateCommand($"SELECT COUNT(id_alumno) " +
+                                                                              $"FROM universidadnikolay.alumnos_cursan " +
+                                                                              $"WHERE id_alumno={idAlumno}");
+            long resultadoQuery =(long)chequeoQuery.ExecuteScalar();
             if ( resultadoQuery == null )
             {
                 throw new Exception("No se pudo hacer la Query");
@@ -142,7 +142,7 @@ namespace Persistance.Repositories
         public async Task<bool> InsertAlumnoEnMateriaAsync(int idAlumno, int idMateria)
         {
             await using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos_cursan " +
-                                                                   $"VALUES ({idAlumno},{idMateria})");
+                                                                         $"VALUES ({idAlumno},{idMateria})");
             
             int? resultadoComando = await command.ExecuteNonQueryAsync();
             if (resultadoComando == -1)

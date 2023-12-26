@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj": {}
+    "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
+    "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\obj\\",
+        "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -65,25 +61,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj": {
+    "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj",
+        "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj",
         "projectName": "Persistance",
-        "projectPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\obj\\",
+        "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj",
+        "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -97,8 +89,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
-                "projectPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj"
+              "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
+                "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -134,25 +126,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj": {
+    "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj",
+        "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj",
-        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\obj\\",
+        "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj",
+        "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -166,11 +154,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
-                "projectPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj"
+              "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
+                "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj"
               },
-              "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj": {
-                "projectPath": "C:\\Users\\USER\\Desktop\\Tareas Nico\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj"
+              "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj": {
+                "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj"
               }
             }
           }
@@ -206,7 +194,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -12,27 +12,27 @@ namespace Service
     {
         public async Task CreateAsync(Materia materia)
         {
-            await DataBase.materiaRepository.CrearAsync(materia);
+            await DataBase.GetInstance().materiaRepository.CrearAsync(materia);
         }
 
         public Task<bool> DeleteAsync(int id)
         {
-            return DataBase.materiaRepository.DeleteAsync(id);
+            return DataBase.GetInstance().materiaRepository.DeleteAsync(id);
         }
 
         public Task<bool> UpdateAsync(Materia materia)
         {
-            return DataBase.materiaRepository.UpdateAsync(materia);
+            return DataBase.GetInstance().materiaRepository.UpdateAsync(materia);
         }
 
         public async Task MateriasDeAlumnoAsync(int idAlumno)
         {
-            await DataBase.materiaRepository.MateriasDeAlumnoAsync(idAlumno);
+            await DataBase.GetInstance().materiaRepository.MateriasDeAlumnoAsync(idAlumno);
         }
 
         public async Task MateriasDeProfesorAsync(int idProfesor)
         {
-            await DataBase.materiaRepository.MateriasDeProfesorAsync(idProfesor);
+            await DataBase.GetInstance().materiaRepository.MateriasDeProfesorAsync(idProfesor);
         }
     }
 }

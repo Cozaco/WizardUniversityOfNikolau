@@ -13,55 +13,62 @@ namespace Service
     public class AlumnoService 
     {
         //private readonly int contadorMaterias;
-        public async Task CreateAsync(Alumno alumno)
+        public async Task CreateAsync(Alumno alumno) //TODO Pasar los datos directamente y hacer el chequeo ahi
         {
-            await DataBase.alumnoRepository.CrearAsync(alumno);
+            await DataBase.GetInstance().alumnoRepository.CrearAsync(alumno);
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            return  await DataBase.alumnoRepository.DeleteAsync(id);
+            return  await DataBase.GetInstance().alumnoRepository.DeleteAsync(id);
         }
 
         public async Task<bool> UpdateAsync(Alumno alumno)
         {
-            return await DataBase.alumnoRepository.UpdateAsync(alumno);
+            return await DataBase.GetInstance().alumnoRepository.UpdateAsync(alumno);
         }
 
         public async Task AlumnosEnLaMateriaAsync(int idMateria)
         {
-            await DataBase.alumnoRepository.AlumnosEnLaMateriaAsync(idMateria);
+            await DataBase.GetInstance().alumnoRepository.AlumnosEnLaMateriaAsync(idMateria);
         }
 
         public async Task AlumnosDeProfesorAsync(int idProfesor)
         {
-            await DataBase.alumnoRepository.AlumnosDeProfesorAsync(idProfesor);
+            await DataBase.GetInstance().alumnoRepository.AlumnosDeProfesorAsync(idProfesor);
         }
 
         //Inscribir alumno en la materia. Primero se cuenta cuantas materias cursa, se chequea con el máximo de materias disponibles y de pasar,
         //se inscribe al alumno en la materia.
         public async Task<bool> InscribirAMateriaAsync(int idAlumno, int idMateria)
         {
-            try
-            {
-                int? materiasCursadas = await DataBase.alumnoRepository.CountMateriasAsync(idAlumno);
+            //try
+            //{
+            //    int? materiasCursadas =(int) await DataBase.GetInstance().alumnoRepository.CountMateriasAsync(idAlumno);
 
-                if (materiasCursadas.HasValue && materiasCursadas >= 2)
-                {
-                    return false;
-                }
-            }
-            catch
+            //    if (materiasCursadas.HasValue && materiasCursadas >= 2)
+            //    {
+            //        return false;
+            //    }
+            //}
+            //catch
+            //{
+            //    return false;
+            //}
+            //return await DataBase.GetInstance().alumnoRepository.InsertAlumnoEnMateriaAsync(idAlumno, idMateria);
+            int? materiasCursadas = (int)await DataBase.GetInstance().alumnoRepository.CountMateriasAsync(idAlumno);
+
+            if (materiasCursadas.HasValue && materiasCursadas >= 2)
             {
                 return false;
             }
-            return await DataBase.alumnoRepository.InsertAlumnoEnMateriaAsync(idAlumno, idMateria);
+            return await DataBase.GetInstance().alumnoRepository.InsertAlumnoEnMateriaAsync(idAlumno, idMateria);
         }
 
 
         public async Task<bool> DesinscribirAMateriaAsync(int idAlumno, int idMateria)
         {
-            return await DataBase.alumnoRepository.DesinscribirAMateriaAsync(idAlumno, idMateria);
+            return await DataBase.GetInstance().alumnoRepository.DesinscribirAMateriaAsync(idAlumno, idMateria);
         }
     }
 }

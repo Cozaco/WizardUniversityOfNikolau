@@ -8,8 +8,9 @@
     ".NETCoreApp,Version=v6.0": {
       "WizardUniversityOfNikolaus/1.0.0": {
         "dependencies": {
+          "Contracts": "1.0.0",
           "Npgsql": "8.0.1",
-          "Persistance": "1.0.0"
+          "Service": "1.0.0"
         },
         "runtime": {
           "WizardUniversityOfNikolaus.dll": {}
@@ -107,6 +108,16 @@
         "runtime": {
           "Persistance.dll": {}
         }
+      },
+      "Service/1.0.0": {
+        "dependencies": {
+          "Contracts": "1.0.0",
+          "Npgsql": "8.0.1",
+          "Persistance": "1.0.0"
+        },
+        "runtime": {
+          "Service.dll": {}
+        }
       }
     }
   },
@@ -171,6 +182,11 @@
       "sha512": ""
     },
     "Persistance/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Service/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

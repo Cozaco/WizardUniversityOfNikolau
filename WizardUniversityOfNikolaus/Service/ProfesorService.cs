@@ -12,37 +12,37 @@ namespace Service
     {
         public async Task CreateAsync(Profesor profesor)
         {
-            await DataBase.profesorRepository.CrearAsync(profesor);
+            await DataBase.GetInstance().profesorRepository.CrearAsync(profesor);
         }
 
         public Task<bool> DeleteAsync(int id)
         {
-            return DataBase.profesorRepository.DeleteAsync(id);
+            return DataBase.GetInstance().profesorRepository.DeleteAsync(id);
         }
 
         public Task<bool> UpdateAsync(Profesor profesor)
         {
-            return DataBase.profesorRepository.UpdateAsync(profesor);
+            return DataBase.GetInstance().profesorRepository.UpdateAsync(profesor);
         }
 
         public async Task ProfesoresDeAlumnoAsync(int idAlumno)
         {
-            await DataBase.profesorRepository.ProfesoresDeAlumnoAsync(idAlumno);
+            await DataBase.GetInstance().profesorRepository.ProfesoresDeAlumnoAsync(idAlumno);
         }
 
         public async Task ProfesoresDeMateriaAsync(int idMateria)
         {
-            await DataBase.profesorRepository.ProfesoresDeMateriaAsync(idMateria);
+            await DataBase.GetInstance().profesorRepository.ProfesoresDeMateriaAsync(idMateria);
         }
 
         public async Task<bool> AsingnarAMateriaAsync(int idProfesor, int idMateria)
         {
-            return await DataBase.profesorRepository.AsingnarAMateriaAsync(idProfesor, idMateria);
+            return await DataBase.GetInstance().profesorRepository.AsingnarAMateriaAsync(idProfesor, idMateria);
         }
 
         public async Task<bool> DejarMateria(int idProfesor, int idMateria)
         {
-            return await DataBase.profesorRepository.DejarMateria(idProfesor,idMateria);
+            return await DataBase.GetInstance().profesorRepository.DejarMateria(idProfesor,idMateria);
         }
     }
 }

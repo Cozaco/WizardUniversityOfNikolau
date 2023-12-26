@@ -8,7 +8,7 @@ namespace Contracts.Models
 {
     public abstract class Persona
     {
-        private int? id;
+        public int? Id { get; set;}
         private string nombre; 
         private int edad;
 
@@ -16,7 +16,7 @@ namespace Contracts.Models
         public Persona(string nombre,int edad, int? id=null)
         {
             this.nombre = nombre;
-            this.id = id;
+            this.Id = id;
             this.edad = edad;
         }
 
@@ -27,12 +27,12 @@ namespace Contracts.Models
 
         public int? GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         public int GetEdad()

@@ -12,6 +12,7 @@ namespace Persistance.Repositories
     public class AlumnoRepository : IAlumnoRepository
     {
         public NpgsqlDataSource dataSource;
+       
 
         public AlumnoRepository(NpgsqlDataSource dataSource)
         {
@@ -127,8 +128,19 @@ namespace Persistance.Repositories
 
         public async Task<bool> InscribirAMateriaAsync(int idAlumno, int idMateria)
         {
+            using NpgsqlCommand commandChequeo = dataSource.CreateCommand($"SELECT COUNT (id_alumno) " +
+                                                                          $"FROM universidadnikolay.alumnos_cursan " +
+                                                                          $"WHERE id_alumno={idAlumno}");
+            int? resultadoChequeo = (int?)await commandChequeo.ExecuteScalarAsync();
+            if (resultadoChequeo >= 2)
+            {
+                Console.WriteLine("El Alumno no puede inscribir a más materias");
+                return false;
+            }
+
+
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos_cursan " +
-                                                                   $"VALUES ({idAlumno},{idMateria}) RETURNING id");
+                                                                   $"VALUES ({idAlumno},{idMateria})");
             
             int? resultadoComando = await command.ExecuteNonQueryAsync();
             if (resultadoComando == -1)
@@ -145,6 +157,30 @@ namespace Persistance.Repositories
                 return false; // no se inscribió ningún alumno
             }
             return true;
+        }
+
+        public async Task<bool> DesinscribirAMateriaAsync(int idAlumno, int idMateria)
+        {
+            await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.alumnos_cursan " +
+                                                                         $"WHERE alumnos_cursan.alumno_id = {idAlumno} " +
+                                                                         $"AND alumno_cursan.materia_id={idMateria}");
+
+            int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
+            Console.WriteLine(resultadoComando);
+            if (resultadoComando == -1)
+            {
+                throw new Exception("Error al eliminar el alumno");
+            }
+            if (resultadoComando > 1)
+            {
+                throw new Exception("F");
+            }
+            if (resultadoComando == 0)
+            {
+                return false; // no se desincribió ningún alumno
+            }
+            return true; //se desincribió exitosamente un alumno
+
         }
     }
 }

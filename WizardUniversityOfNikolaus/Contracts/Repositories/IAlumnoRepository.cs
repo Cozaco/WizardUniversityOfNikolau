@@ -21,5 +21,7 @@ namespace Contracts.Repositories
 
         public Task<bool> InscribirAMateriaAsync(int idAlumno, int idMateria);
 
+        public Task<bool> DesinscribirAMateriaAsync(int idAlumno, int idMateria);
+
     }
 }

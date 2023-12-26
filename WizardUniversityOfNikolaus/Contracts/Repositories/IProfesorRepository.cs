@@ -19,5 +19,7 @@ namespace Contracts.Repositories
         public Task ProfesoresDeMateriaAsync(int idMateria);
 
         public Task<bool> AsingnarAMateriaAsync(int idProfesor, int idMateria);
+
+        public Task<bool> DejarMateria(int idProfesor, int idMateria);
     }
 }

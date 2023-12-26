@@ -128,7 +128,19 @@ namespace Persistance.Repositories
 
         public async Task<bool> AsingnarAMateriaAsync(int idProfesor, int idMateria)
         {
-            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.profesores_dictan VALUES ({idProfesor},{idMateria}) RETURNING id");
+            using NpgsqlCommand commandChequeo = dataSource.CreateCommand($"SELECT COUNT (id_alumno) " +
+                                                                          $"FROM universidadnikolay.profesores_dictan " +
+                                                                          $"WHERE id_profesor={idProfesor}");
+            int? resultadoChequeo = (int?)await commandChequeo.ExecuteScalarAsync();
+            if (resultadoChequeo >= 1)
+            {
+                Console.WriteLine("El Profesor no puede dictar más materias");
+                return false;
+            }
+
+            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.profesores_dictan " +
+                                                                   $"VALUES ({idProfesor},{idMateria})");
+
             int? resultadoComando = await command.ExecuteNonQueryAsync();
             if (resultadoComando == -1)
             {
@@ -146,5 +158,28 @@ namespace Persistance.Repositories
             return true;
         }
 
+        public async Task<bool> DejarMateria(int idProfesor, int idMateria)
+        {
+            await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.profesores_dictan " +
+                                                                          $"WHERE profesores_dictan.profesor_id = {idProfesor} " +
+                                                                          $"AND profesores_dictan.materia_id={idMateria}");
+
+            int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
+            Console.WriteLine(resultadoComando);
+            if (resultadoComando == -1)
+            {
+                throw new Exception("Error al eliminar el alumno");
+            }
+            if (resultadoComando > 1)
+            {
+                throw new Exception("F");
+            }
+            if (resultadoComando == 0)
+            {
+                return false; // El profesor no pudo dejar esa materia
+            }
+            return true; //El profesor dejó la materia 
+
+        }
     }
 }

@@ -11,11 +11,15 @@ namespace WizardUniversityOfNikolaus
     {
         static async Task Main(string[] args)
         {
-            DataBase tabla = DataBase.GetInstance();
+            //DataBase tabla = DataBase.GetInstance();
 
-            Materia sae = new Materia("Biologia", 1);
+            //Materia sae = new Materia("Biologia", 1);
 
-            await DataBase.materiaRepository.CrearAsync(sae);
+            //await DataBase.materiaRepository.CrearAsync(sae);
+
+            Alumno lolo= new Alumno("Pablo Lorenzo Battaglini",25);
+
+            AlumnoService
 
         }
     }

@@ -126,31 +126,28 @@ namespace Persistance.Repositories
             }
         }
 
-        public async Task<bool> InscribirAMateriaAsync(int idAlumno, int idMateria)
+        public async Task<int> CountMateriasAsync(int idAlumno)
         {
-            using NpgsqlCommand commandChequeo = dataSource.CreateCommand($"SELECT COUNT (id_alumno) " +
+            await using NpgsqlCommand chequeoQuery = dataSource.CreateCommand($"SELECT COUNT (id_alumno) " +
                                                                           $"FROM universidadnikolay.alumnos_cursan " +
                                                                           $"WHERE id_alumno={idAlumno}");
-            int? resultadoChequeo = (int?)await commandChequeo.ExecuteScalarAsync();
-            if (resultadoChequeo >= 2)
+            int? resultadoQuery = (int?) chequeoQuery.ExecuteScalar();
+            if ( resultadoQuery == null )
             {
-                Console.WriteLine("El Alumno no puede inscribir a más materias");
-                return false;
+                throw new Exception("No se pudo hacer la Query");
             }
+            return (int) resultadoQuery;
+        }
 
-
-            using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos_cursan " +
+        public async Task<bool> InsertAlumnoEnMateriaAsync(int idAlumno, int idMateria)
+        {
+            await using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos_cursan " +
                                                                    $"VALUES ({idAlumno},{idMateria})");
             
             int? resultadoComando = await command.ExecuteNonQueryAsync();
             if (resultadoComando == -1)
             {
                 throw new Exception("No se pudo inscribir al alumno");
-
-            }
-            if (resultadoComando > 1)
-            {
-                throw new Exception("F");
             }
             if (resultadoComando == 0)
             {
@@ -163,17 +160,12 @@ namespace Persistance.Repositories
         {
             await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.alumnos_cursan " +
                                                                          $"WHERE alumnos_cursan.alumno_id = {idAlumno} " +
-                                                                         $"AND alumno_cursan.materia_id={idMateria}");
+                                                                         $"AND alumno_cursan.materia_id = {idMateria}");
 
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
-            Console.WriteLine(resultadoComando);
             if (resultadoComando == -1)
             {
                 throw new Exception("Error al eliminar el alumno");
-            }
-            if (resultadoComando > 1)
-            {
-                throw new Exception("F");
             }
             if (resultadoComando == 0)
             {

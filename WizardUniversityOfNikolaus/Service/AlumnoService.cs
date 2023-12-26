@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using Contracts.Models;
@@ -37,10 +38,26 @@ namespace Service
             await DataBase.alumnoRepository.AlumnosDeProfesorAsync(idProfesor);
         }
 
+        //Inscribir alumno en la materia. Primero se cuenta cuantas materias cursa, se chequea con el máximo de materias disponibles y de pasar,
+        //se inscribe al alumno en la materia.
         public async Task<bool> InscribirAMateriaAsync(int idAlumno, int idMateria)
         {
-            return await DataBase.alumnoRepository.InscribirAMateriaAsync(idAlumno, idMateria);
+            try
+            {
+                int? materiasCursadas = await DataBase.alumnoRepository.CountMateriasAsync(idAlumno);
+
+                if (materiasCursadas.HasValue && materiasCursadas >= 2)
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            return await DataBase.alumnoRepository.InsertAlumnoEnMateriaAsync(idAlumno, idMateria);
         }
+
 
         public async Task<bool> DesinscribirAMateriaAsync(int idAlumno, int idMateria)
         {

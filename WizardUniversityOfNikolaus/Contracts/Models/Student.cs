@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Contracts.Models
 {
-    public class Alumno : Persona
+    public class Student : User
     {
-        public Alumno(string nombre, int edad = 0, int? id = null) : base(nombre, edad, id) { }
+        public Student(string nombre, int edad = 0, int? id = null) : base(nombre, edad, id) { }
     }
 }

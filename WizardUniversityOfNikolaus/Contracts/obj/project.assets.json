@@ -441,9 +441,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj",
-      "projectName": "Contracts",
-      "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj",
+      "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\UniSmart.Contracts.csproj",
+      "projectName": "UniSmart.Contracts",
+      "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\UniSmart.Contracts.csproj",
       "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\obj\\",
       "projectStyle": "PackageReference",

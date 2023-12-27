@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Persistance.Repositories
 {
-    public class ProfesorRepository : IProfesorRepository
+    public class ProfesorRepository : IProfessorRepository
     {
         public NpgsqlDataSource dataSource;
 
@@ -18,7 +18,7 @@ namespace Persistance.Repositories
             this.dataSource = dataSource;
         }
 
-        public async Task CrearAsync(Profesor profesor)
+        public async Task CrearAsync(Professor profesor)
         {
 
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.profesores (nombre,edad) " +
@@ -57,7 +57,7 @@ namespace Persistance.Repositories
             return true; //se borró exitosamente un profesor
         }
 
-        public async Task<bool> UpdateAsync(Profesor profesor) //alumno con el update HECHO
+        public async Task<bool> UpdateAsync(Professor profesor) //alumno con el update HECHO
         {
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.profesores " +
                                                                    $"SET nombre = '{profesor.GetNombre()}', edad = {profesor.GetEdad()}" +
@@ -90,13 +90,13 @@ namespace Persistance.Repositories
                                                                         $"WHERE alumnos_cursan.alumno_id={idAlumno}");
 
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
-            List<Profesor> profesores = new List<Profesor>();
+            List<Professor> profesores = new List<Professor>();
             while (reader.Read())
             {
-                Profesor profesor = new Profesor(reader.GetString(1), reader.GetInt32(0));
+                Professor profesor = new Professor(reader.GetString(1), reader.GetInt32(0));
                 profesores.Add(profesor);
             }
-            foreach (Profesor profesor in profesores)
+            foreach (Professor profesor in profesores)
             {
                 Console.WriteLine($"ID:{profesor.GetId()}");
                 Console.WriteLine($"Nombre:{profesor.GetNombre()}");
@@ -112,13 +112,13 @@ namespace Persistance.Repositories
                                                                         $"WHERE profesores_dictan.materia_id={idMateria}");
 
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
-            List<Profesor> profesoresEnLaMateria = new List<Profesor>();
+            List<Professor> profesoresEnLaMateria = new List<Professor>();
             while (reader.Read())
             {
-                Profesor profesor = new Profesor(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
+                Professor profesor = new Professor(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
                 profesoresEnLaMateria.Add(profesor);
             }
-            foreach (Profesor profesor in profesoresEnLaMateria)
+            foreach (Professor profesor in profesoresEnLaMateria)
             {
                 Console.WriteLine($"ID:{profesor.GetId()}");
                 Console.WriteLine($"Nombre:{profesor.GetNombre()}");

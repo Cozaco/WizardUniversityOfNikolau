@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LxQf3plkxxizwgTmt11jE4X2P1CL8b7SFE184T+0x6KYyaRy6weU3YyfWOsOGfT4YX3/I06856rjtwcgAid+yA==",
+  "dgSpecHash": "SQW0AjmOZlKMX4U2gfrEJWmeWSU+1DlCISOnknnkQ+lj4v6fgaBFyNhXNyJIjL1lfgrje+iwxwOaDifgR4QcsA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj",
+  "projectFilePath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\UniSmart.Service.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\loren\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\loren\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",

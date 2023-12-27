@@ -136,31 +136,31 @@
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
       },
-      "Contracts/1.0.0": {
+      "UniSmart.Contracts/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Npgsql": "8.0.1"
         },
         "compile": {
-          "bin/placeholder/Contracts.dll": {}
+          "bin/placeholder/UniSmart.Contracts.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Contracts.dll": {}
+          "bin/placeholder/UniSmart.Contracts.dll": {}
         }
       },
-      "Persistance/1.0.0": {
+      "UniSmart.Persistance/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Contracts": "1.0.0",
-          "Npgsql": "8.0.1"
+          "Npgsql": "8.0.1",
+          "UniSmart.Contracts": "1.0.0"
         },
         "compile": {
-          "bin/placeholder/Persistance.dll": {}
+          "bin/placeholder/UniSmart.Persistance.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Persistance.dll": {}
+          "bin/placeholder/UniSmart.Persistance.dll": {}
         }
       }
     }
@@ -456,22 +456,22 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Contracts/1.0.0": {
+    "UniSmart.Contracts/1.0.0": {
       "type": "project",
-      "path": "../Contracts/Contracts.csproj",
-      "msbuildProject": "../Contracts/Contracts.csproj"
+      "path": "../Contracts/UniSmart.Contracts.csproj",
+      "msbuildProject": "../Contracts/UniSmart.Contracts.csproj"
     },
-    "Persistance/1.0.0": {
+    "UniSmart.Persistance/1.0.0": {
       "type": "project",
-      "path": "../Persistance/Persistance.csproj",
-      "msbuildProject": "../Persistance/Persistance.csproj"
+      "path": "../Persistance/UniSmart.Persistance.csproj",
+      "msbuildProject": "../Persistance/UniSmart.Persistance.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Contracts >= 1.0.0",
       "Npgsql >= 8.0.1",
-      "Persistance >= 1.0.0"
+      "UniSmart.Contracts >= 1.0.0",
+      "UniSmart.Persistance >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -480,9 +480,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj",
-      "projectName": "Service",
-      "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\Service.csproj",
+      "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\UniSmart.Service.csproj",
+      "projectName": "UniSmart.Service",
+      "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\UniSmart.Service.csproj",
       "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Service\\obj\\",
       "projectStyle": "PackageReference",
@@ -501,11 +501,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj": {
-              "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\Contracts.csproj"
+            "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\UniSmart.Contracts.csproj": {
+              "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\UniSmart.Contracts.csproj"
             },
-            "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj": {
-              "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\Persistance.csproj"
+            "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\UniSmart.Persistance.csproj": {
+              "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Persistance\\UniSmart.Persistance.csproj"
             }
           }
         }

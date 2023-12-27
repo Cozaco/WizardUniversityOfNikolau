@@ -11,15 +11,38 @@ namespace WizardUniversityOfNikolaus
     {
         static async Task Main(string[] args)
         {
-            //DataBase tabla = DataBase.GetInstance();
+            //DataBase tabla = DataBase.GetInstance().GetInstance();
 
             //Materia sae = new Materia("Biologia", 1);
 
-            //await DataBase.materiaRepository.CrearAsync(sae);
+            //await DataBase.GetInstance().materiaRepository.CrearAsync(sae);
 
-            Alumno lolo= new Alumno("Pablo Lorenzo Battaglini",25);
+            //Alumno lolo= new Alumno("Pablo Lorenzo Battaglini",25);
 
-            AlumnoService
+            StudentService alumnoService = new StudentService();
+
+            //await alumnoService.CreateAsync(lolo);//TODO jajajaja dale boca
+
+            Subject matematica1 = new Subject("Matemática", 1);
+
+            Subject matematica2 = new Subject("Matemática", 2);
+
+            Subject matematica3 = new Subject("Matemática", 3);
+
+            SubjectService materiaService= new SubjectService();
+
+            //await materiaService.CreateAsync(matematica1);
+
+            //await materiaService.CreateAsync(matematica2);
+
+            //await materiaService.CreateAsync(matematica3);
+
+
+            await alumnoService.InscribirAMateriaAsync(1, 2);
+
+            await alumnoService.InscribirAMateriaAsync(1, 3);
+
+
 
         }
     }

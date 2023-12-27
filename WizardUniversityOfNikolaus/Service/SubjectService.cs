@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    public class MateriaService 
+    public class SubjectService 
     {
-        public async Task CreateAsync(Materia materia)
+        public async Task CreateAsync(Subject materia)
         {
             await DataBase.materiaRepository.CrearAsync(materia);
         }
@@ -20,7 +20,7 @@ namespace Service
             return DataBase.materiaRepository.DeleteAsync(id);
         }
 
-        public Task<bool> UpdateAsync(Materia materia)
+        public Task<bool> UpdateAsync(Subject materia)
         {
             return DataBase.materiaRepository.UpdateAsync(materia);
         }

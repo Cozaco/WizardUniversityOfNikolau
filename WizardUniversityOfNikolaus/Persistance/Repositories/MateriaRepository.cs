@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Persistance.Repositories
 {
-    public class MateriaRepository : IMateriaRepository
+    public class MateriaRepository : ISubjectRepository
     {
         public NpgsqlDataSource dataSource;
 
@@ -17,7 +17,7 @@ namespace Persistance.Repositories
         {
             this.dataSource = dataSource;
         }
-        public async Task CrearAsync(Materia materia)
+        public async Task CrearAsync(Subject materia)
         {
 
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.materias (nombre, comision)" +
@@ -56,7 +56,7 @@ namespace Persistance.Repositories
             return true; //se borró exitosamente una materia
         }
 
-        public async Task<bool> UpdateAsync(Materia materia) //materia con el update HECHO
+        public async Task<bool> UpdateAsync(Subject materia) //materia con el update HECHO
         {
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.materias " +
                                                                    $"SET nombre = '{materia.GetNombre()}', comision = {materia.GetComision()}" +
@@ -88,13 +88,13 @@ namespace Persistance.Repositories
                                                                         $"WHERE alumnos_cursan.alumno_id={idAlumno}");
             
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
-            List<Materia> materiasQueCursa = new List<Materia>();
+            List<Subject> materiasQueCursa = new List<Subject>();
             while (reader.Read())
             {
-                Materia materia = new Materia(reader.GetString(1), reader.GetInt32(0));
+                Subject materia = new Subject(reader.GetString(1), reader.GetInt32(0));
                 materiasQueCursa.Add(materia);
             }
-            foreach (Materia materia in materiasQueCursa)
+            foreach (Subject materia in materiasQueCursa)
             {
                 Console.WriteLine($"ID:{materia.GetId()}");
                 Console.WriteLine($"Nombre:{materia.GetNombre()}");
@@ -110,13 +110,13 @@ namespace Persistance.Repositories
                                                                         $"WHERE profesores_dictan.profesor_id={idProfesor}");
             
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
-            List<Materia> materiasQueCursa = new List<Materia>();
+            List<Subject> materiasQueCursa = new List<Subject>();
             while (reader.Read())
             {
-                Materia materia = new Materia(reader.GetString(1), reader.GetInt32(0));
+                Subject materia = new Subject(reader.GetString(1), reader.GetInt32(0));
                 materiasQueCursa.Add(materia);
             }
-            foreach (Materia materia in materiasQueCursa)
+            foreach (Subject materia in materiasQueCursa)
             {
                 Console.WriteLine($"ID:{materia.GetId()}");
                 Console.WriteLine($"Nombre:{materia.GetNombre()}");

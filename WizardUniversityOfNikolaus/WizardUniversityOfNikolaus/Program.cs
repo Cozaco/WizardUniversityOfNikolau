@@ -23,13 +23,13 @@ namespace WizardUniversityOfNikolaus
 
             //await alumnoService.CreateAsync(lolo);//TODO jajajaja dale boca
 
-            Subject matematica1 = new Subject("Matemática", 1);
+            Course matematica1 = new Course("Matemática", 1);
 
-            Subject matematica2 = new Subject("Matemática", 2);
+            Course matematica2 = new Course("Matemática", 2);
 
-            Subject matematica3 = new Subject("Matemática", 3);
+            Course matematica3 = new Course("Matemática", 3);
 
-            SubjectService materiaService= new SubjectService();
+            CourseService materiaService= new CourseService();
 
             //await materiaService.CreateAsync(matematica1);
 
@@ -38,9 +38,9 @@ namespace WizardUniversityOfNikolaus
             //await materiaService.CreateAsync(matematica3);
 
 
-            await alumnoService.InscribirAMateriaAsync(1, 2);
+            await alumnoService.TakeCourseAsync(1, 2);
 
-            await alumnoService.InscribirAMateriaAsync(1, 3);
+            await alumnoService.TakeCourseAsync(1, 3);
 
 
 

@@ -20,11 +20,11 @@ namespace Persistance.Repositories
             this.dataSource = dataSource;
         }
 
-        public async Task CrearAsync(Student alumno)
+        public async Task CrearAsync(Student student)
         {
             
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos (nombre,edad) " +
-                                                                   $"VALUES ('{alumno.GetNombre()}',{alumno.GetEdad()}) " +
+                                                                   $"VALUES ('{student.GetName()}',{student.GetAge()}) " +
                                                                    $"RETURNING id");
             
             int? resultadoComando=(int?)await command.ExecuteScalarAsync();
@@ -33,7 +33,7 @@ namespace Persistance.Repositories
                 throw new Exception("No se pudo agregar alumno");
 
             }
-            alumno.Id = resultadoComando.Value;
+            student.Id = resultadoComando.Value;
             return;
         }
 
@@ -59,11 +59,11 @@ namespace Persistance.Repositories
             return true; //se borró exitosamente un alumno
         }
 
-        public async Task<bool> UpdateAsync(Student alumno) //alumno con el update HECHO
+        public async Task<bool> UpdateAsync(Student student) //alumno con el update HECHO
         {
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.alumnos " +
-                                                                   $"SET nombre = '{alumno.GetNombre()}', edad = {alumno.GetEdad()} " +
-                                                                   $"WHERE id = {alumno.GetId()}");
+                                                                   $"SET nombre = '{student.GetName()}', edad = {student.GetAge()} " +
+                                                                   $"WHERE id = {student.GetId()}");
             
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
@@ -80,13 +80,13 @@ namespace Persistance.Repositories
             }
             return true; //se borró exitosamente un alumno
         }
-        public async Task AlumnosEnLaMateriaAsync(int idMateria)
+        public async Task GetCourseStudentsAsync(int idCourse)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT alumnos.id,alumnos.nombre,alumnos.edad " +
                                                                         $"FROM universidadnikolay.alumnos " +
                                                                         $"JOIN universidadnikolay.alumnos_cursan " +
                                                                         $"ON alumnos.id=alumnos_cursan.alumno_id " +
-                                                                        $"WHERE alumnos_cursan.materia_id={idMateria}");
+                                                                        $"WHERE alumnos_cursan.materia_id={idCourse}");
             
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
             List<Professor> alumnosEnLaMateria = new List<Professor>();
@@ -98,12 +98,12 @@ namespace Persistance.Repositories
             foreach (Professor alumno in alumnosEnLaMateria)
             {
                 Console.WriteLine($"ID:{alumno.GetId()}");
-                Console.WriteLine($"Nombre:{alumno.GetNombre()}");
-                Console.WriteLine($"Nombre:{alumno.GetEdad()}");
+                Console.WriteLine($"Nombre:{alumno.GetName()}");
+                Console.WriteLine($"Nombre:{alumno.GetAge()}");
             }
         }
 
-        public async Task AlumnosDeProfesorAsync(int idProfesor)
+        public async Task GetProfessorStudentsAsync(int idProfessor)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT alumnos.id,alumnos.nombre " +
                                                                         $"FROM universidadnikolay.alumnos " +
@@ -111,7 +111,7 @@ namespace Persistance.Repositories
                                                                         $"ON alumnos.id=alumnos_cursan.alumno_id " +
                                                                         $"JOIN universidadnikolay.profesores_dictan " +
                                                                         $"ON profesores_dictan.materia_id=alumnos_cursan.materia_id " +
-                                                                        $"WHERE profesores_dictan.profesor_id={idProfesor}");
+                                                                        $"WHERE profesores_dictan.profesor_id={idProfessor}");
             
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
             List<Professor> alumnos = new List<Professor>();
@@ -123,15 +123,15 @@ namespace Persistance.Repositories
             foreach (Professor profesor in alumnos)
             {
                 Console.WriteLine($"ID:{profesor.GetId()}");
-                Console.WriteLine($"Nombre:{profesor.GetNombre()}");
+                Console.WriteLine($"Nombre:{profesor.GetName()}");
             }
         }
 
-        public async Task<long> CountMateriasAsync(int idAlumno)
+        public async Task<long> CountCoursesAsync(int idStudent)
         {
             await using NpgsqlCommand chequeoQuery = dataSource.CreateCommand($"SELECT COUNT(id_alumno) " +
                                                                               $"FROM universidadnikolay.alumnos_cursan " +
-                                                                              $"WHERE id_alumno={idAlumno}");
+                                                                              $"WHERE id_alumno={idStudent}");
             long? resultadoQuery =(long?)chequeoQuery.ExecuteScalar();
             if ( resultadoQuery == null )
             {
@@ -140,10 +140,10 @@ namespace Persistance.Repositories
             return (int) resultadoQuery;
         }
 
-        public async Task<bool> InsertAlumnoEnMateriaAsync(int idAlumno, int idMateria)
+        public async Task<bool> TakeCourseAsync(int idStudent, int idCourse)
         {
             await using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos_cursan " +
-                                                                         $"VALUES ({idAlumno},{idMateria})");
+                                                                         $"VALUES ({idStudent},{idCourse})");
             
             int? resultadoComando = await command.ExecuteNonQueryAsync();
             if (resultadoComando == -1)
@@ -157,11 +157,11 @@ namespace Persistance.Repositories
             return true;
         }
 
-        public async Task<bool> DesinscribirAMateriaAsync(int idAlumno, int idMateria)//esta
+        public async Task<bool> LeaveCourseAsync(int idStudent, int idCourse)//esta
         {
             await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.alumnos_cursan " +
-                                                                         $"WHERE alumnos_cursan.alumno_id = {idAlumno} " +
-                                                                         $"AND alumno_cursan.materia_id = {idMateria}");
+                                                                         $"WHERE alumnos_cursan.alumno_id = {idStudent} " +
+                                                                         $"AND alumno_cursan.materia_id = {idCourse}");
 
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)

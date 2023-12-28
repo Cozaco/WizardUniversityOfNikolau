@@ -9,21 +9,21 @@ namespace Contracts.Repositories
 {
     public interface IStudentRepository
     {
-        public Task CrearAsync(Student alumno);
+        public Task CrearAsync(Student student);
         
-        public Task<bool> DeleteAsync(int idAlumno);
+        public Task<bool> DeleteAsync(int idStudent);
 
-        public Task<bool> UpdateAsync(Student alumno);
+        public Task<bool> UpdateAsync(Student student);
 
-        public Task AlumnosEnLaMateriaAsync(int idMateria);
+        public Task GetCourseStudentsAsync(int idMateria);
 
-        public Task AlumnosDeProfesorAsync(int idProfesor);
+        public Task GetProfessorStudentsAsync(int idProfessor);
 
-        public Task<long> CountMateriasAsync(int idAlumno);
+        public Task<long> CountCoursesAsync(int idStudent);
 
-        public Task<bool> InsertAlumnoEnMateriaAsync(int idAlumno, int idMateria);
+        public Task<bool> TakeCourseAsync(int idStudent, int idMateria);
 
-        public Task<bool> DesinscribirAMateriaAsync(int idAlumno, int idMateria);
+        public Task<bool> LeaveCourseAsync(int idStudent, int idMateria);
 
     }
 }

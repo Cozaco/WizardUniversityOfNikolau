@@ -8,7 +8,7 @@ namespace Contracts.Models
 {
     public class Professor : User
     {
-        public Professor(string nombre,int edad=0, int? id = null) : base(nombre,edad, id) { }
+        public Professor(string name,int age=0, int? id = null) : base(name,age, id) { }
 
 
     }

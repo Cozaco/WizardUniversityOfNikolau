@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "pHznqvzfnBpfXTntZwTRej86OdiXgd+Y3Sq0xrUj5HI=",
+  "Source": "UniSmart.API",
+  "BasePath": "_content/UniSmart.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

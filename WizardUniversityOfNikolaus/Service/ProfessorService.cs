@@ -10,39 +10,39 @@ namespace Service
 {
     public class ProfessorService 
     {
-        public async Task CreateAsync(Professor profesor)
+        public async Task CreateAsync(Professor professor)//TODO le tengo que pasar los datos no un profesor
         {
-            await DataBase.profesorRepository.CrearAsync(profesor);
+            await DataBase.GetInstance().professorRepository.Create(professor);
         }
 
         public Task<bool> DeleteAsync(int id)
         {
-            return DataBase.profesorRepository.DeleteAsync(id);
+            return DataBase.GetInstance().professorRepository.DeleteAsync(id);
         }
 
-        public Task<bool> UpdateAsync(Professor profesor)
+        public Task<bool> UpdateAsync(Professor professor)//TODO Aca también los datos
         {
-            return DataBase.profesorRepository.UpdateAsync(profesor);
+            return DataBase.GetInstance().professorRepository.UpdateAsync(professor);
         }
 
-        public async Task ProfesoresDeAlumnoAsync(int idAlumno)
+        public async Task GetStudentProfessorsAsync(int idStudent)
         {
-            await DataBase.profesorRepository.ProfesoresDeAlumnoAsync(idAlumno);
+            await DataBase.GetInstance().professorRepository.GetStudentProfessorsAsync(idStudent);
         }
 
-        public async Task ProfesoresDeMateriaAsync(int idMateria)
+        public async Task GetCourseProfessorsAsync(int idCourse)
         {
-            await DataBase.profesorRepository.ProfesoresDeMateriaAsync(idMateria);
+            await DataBase.GetInstance().professorRepository.GetCourseProfessorsAsync(idCourse);
         }
 
-        public async Task<bool> AsingnarAMateriaAsync(int idProfesor, int idMateria)
+        public async Task<bool> TakeCourseAsync(int idProfessor, int idCourse)
         {
-            return await DataBase.profesorRepository.AsingnarAMateriaAsync(idProfesor, idMateria);
+            return await DataBase.GetInstance().professorRepository.TakeCourseAsync(idProfessor, idCourse);
         }
 
-        public async Task<bool> DejarMateria(int idProfesor, int idMateria)
+        public async Task<bool> LeaveCourseAsync(int idProfessor, int idCourse)
         {
-            return await DataBase.profesorRepository.DejarMateria(idProfesor,idMateria);
+            return await DataBase.GetInstance().professorRepository.LeaveCourseAsync(idProfessor,idCourse);
         }
     }
 }

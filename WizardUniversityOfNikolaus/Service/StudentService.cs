@@ -13,34 +13,34 @@ namespace Service
     public class StudentService 
     {
         //private readonly int contadorMaterias;
-        public async Task CreateAsync(Student alumno) //TODO Pasar los datos directamente y hacer el chequeo ahi
+        public async Task CreateAsync(Student student) //TODO Pasar los datos directamente y hacer el chequeo ahi
         {
-            await DataBase.GetInstance().alumnoRepository.CrearAsync(alumno);
+            await DataBase.GetInstance().studentRepository.CrearAsync(student);
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            return  await DataBase.GetInstance().alumnoRepository.DeleteAsync(id);
+            return  await DataBase.GetInstance().studentRepository.DeleteAsync(id);
         }
 
-        public async Task<bool> UpdateAsync(Student alumno)
+        public async Task<bool> UpdateAsync(Student student)//TODO pasar datos
         {
-            return await DataBase.GetInstance().alumnoRepository.UpdateAsync(alumno);
+            return await DataBase.GetInstance().studentRepository.UpdateAsync(student);
         }
 
-        public async Task AlumnosEnLaMateriaAsync(int idMateria)
+        public async Task GetCourseStudentsAsync(int idCourse)
         {
-            await DataBase.GetInstance().alumnoRepository.AlumnosEnLaMateriaAsync(idMateria);
+            await DataBase.GetInstance().studentRepository.GetCourseStudentsAsync(idCourse);
         }
 
-        public async Task AlumnosDeProfesorAsync(int idProfesor)
+        public async Task GetProfessorStudentsAsync(int idProfessor)
         {
-            await DataBase.GetInstance().alumnoRepository.AlumnosDeProfesorAsync(idProfesor);
+            await DataBase.GetInstance().studentRepository.GetProfessorStudentsAsync(idProfessor);
         }
 
         //Inscribir alumno en la materia. Primero se cuenta cuantas materias cursa, se chequea con el máximo de materias disponibles y de pasar,
         //se inscribe al alumno en la materia.
-        public async Task<bool> InscribirAMateriaAsync(int idAlumno, int idMateria)
+        public async Task<bool> TakeCourseAsync(int idStudent, int idCourse)//TODO mirar lo del try
         {
             //try
             //{
@@ -56,19 +56,19 @@ namespace Service
             //    return false;
             //}
             //return await DataBase.GetInstance().alumnoRepository.InsertAlumnoEnMateriaAsync(idAlumno, idMateria);
-            int? materiasCursadas = (int)await DataBase.GetInstance().alumnoRepository.CountMateriasAsync(idAlumno);
+            int? materiasCursadas = (int)await DataBase.GetInstance().studentRepository.CountCoursesAsync(idStudent);
 
             if (materiasCursadas.HasValue && materiasCursadas >= 2)
             {
                 return false;
             }
-            return await DataBase.GetInstance().alumnoRepository.InsertAlumnoEnMateriaAsync(idAlumno, idMateria);
+            return await DataBase.GetInstance().studentRepository.TakeCourseAsync(idStudent, idCourse);
         }
 
 
-        public async Task<bool> DesinscribirAMateriaAsync(int idAlumno, int idMateria)
+        public async Task<bool> LeaveCourseAsync(int idAlumno, int idMateria)
         {
-            return await DataBase.GetInstance().alumnoRepository.DesinscribirAMateriaAsync(idAlumno, idMateria);
+            return await DataBase.GetInstance().studentRepository.LeaveCourseAsync(idAlumno, idMateria);
         }
     }
 }

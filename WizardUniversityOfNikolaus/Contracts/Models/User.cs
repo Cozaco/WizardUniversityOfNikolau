@@ -9,20 +9,20 @@ namespace Contracts.Models
     public abstract class User
     {
         public int? Id { get; set; }
-        private string nombre; 
-        private int edad;
+        private string name; 
+        private int age;
 
 
-        public User(string nombre,int edad, int? id=null)
+        public User(string name,int age, int? id=null)
         {
-            this.nombre = nombre;
+            this.name = name;
             this.Id = id;
-            this.edad = edad;
+            this.age = age;
         }
 
-        public string GetNombre()
+        public string GetName()
         {
-            return nombre;
+            return name;
         }
 
         public int? GetId()
@@ -35,9 +35,9 @@ namespace Contracts.Models
             this.Id = id;
         }
 
-        public int GetEdad()
+        public int GetAge()
         {
-            return edad;
+            return age;
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Contracts.Models
 {
     public class Student : User
     {
-        public Student(string nombre, int edad = 0, int? id = null) : base(nombre, edad, id) { }
+        public Student(string name, int age = 0, int? id = null) : base(name, age, id) { }
     }
 }

@@ -14,16 +14,16 @@ namespace Persistance
     {
         private static DataBase? dataBaseInstance;
         private static readonly NpgsqlDataSource dataSource = NpgsqlDataSource.Create("Host=127.0.0.1;Username=postgres;Password=loba2110;Database=postgres");
-        public IStudentRepository alumnoRepository;
-        public IProfessorRepository profesorRepository;
-        public ISubjectRepository materiaRepository;
+        public IStudentRepository studentRepository;
+        public IProfessorRepository professorRepository;
+        public ICourseRepository courseRepository;
 
 
         private DataBase()
         {
-            alumnoRepository= new StudentRepository(dataSource);
-            profesorRepository=new ProfesorRepository(dataSource);
-            materiaRepository= new MateriaRepository(dataSource); 
+            studentRepository= new StudentRepository(dataSource);
+            professorRepository=new ProfessorRepository(dataSource);
+            courseRepository= new CourseRepository(dataSource); 
         }
 
         public static DataBase GetInstance()

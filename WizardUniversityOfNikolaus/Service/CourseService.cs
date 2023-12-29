@@ -10,9 +10,25 @@ namespace Service
 {
     public class CourseService 
     {
-        public async Task CreateAsync(Course course)//TODO Pasar a pedir datos,hacer chequeos correspondientes
+        private bool InputCheck(string name,int comission)
         {
+            if (name == "")
+            {
+                throw new Exception("You must complete the name space");
+            }
+            if (comission < 1)
+            {
+                throw new Exception("The comission number must be greater than 0");
+            }
+            return true;
+        }
+        
+        public async Task<Course> CreateAsync(string name,int comission)//TODO Check
+        {
+            if (!InputCheck(name, comission)) { throw new Exception(); }
+            Course course = new Course(name, comission);
             await DataBase.GetInstance().courseRepository.CreateAsync(course);
+            return course;
         }
 
         public Task<bool> DeleteAsync(int id)
@@ -20,9 +36,16 @@ namespace Service
             return DataBase.GetInstance().courseRepository.DeleteAsync(id);
         }
 
-        public Task<bool> UpdateAsync(Course course)//TODO Pasar a pedir datos
+        public async Task<Course> UpdateAsync(string oldName,int oldComission,string newName,int newComission,int idCourse)//TODO check
         {
-            return DataBase.GetInstance().courseRepository.UpdateAsync(course);
+            if(await DataBase.GetInstance().courseRepository.ValidateInfo(idCourse, oldName, oldComission))
+            {
+                throw new Exception("The input is wrong, please check the info provided");//TODO como le hago llegar eso al usario?
+            }
+            if (!InputCheck(newName, newComission)) { throw new Exception(); }
+            Course course = new Course(newName, newComission,idCourse);
+            await DataBase.GetInstance().courseRepository.UpdateAsync(course);
+            return course;
         }
 
         public async Task GetStudentCoursesAsync(int idStudent)

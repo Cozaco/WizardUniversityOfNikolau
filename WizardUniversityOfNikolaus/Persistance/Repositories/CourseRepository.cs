@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Persistance.Repositories
 {
-    public class CourseRepository : ICourseRepository
+    public class CourseRepository :ICourseRepository
     {
         public NpgsqlDataSource dataSource;
 
@@ -27,7 +27,7 @@ namespace Persistance.Repositories
             int? resultadoComando = (int?) await command.ExecuteScalarAsync();
             if (resultadoComando == null)
             {
-                throw new Exception("No se pudo agregar materia");
+                throw new Exception("Couldn´t add the course to database");
 
             }
             course.SetId(resultadoComando.Value);
@@ -56,8 +56,24 @@ namespace Persistance.Repositories
             return true; //se borró exitosamente una materia
         }
 
-        public async Task<bool> UpdateAsync(Course course) //materia con el update HECHO
+        public async Task<bool> ValidateInfo(int id,string name,int comission)
         {
+            using NpgsqlCommand command = dataSource.CreateCommand($"SELECT * " +
+                                                                   $"FROM universidadnikolay.materias " +
+                                                                   $"WHERE id = {id} " +
+                                                                   $"AND nombre={name} " +
+                                                                   $"AND comision={comission}" );
+            
+            int commandResult= await command.ExecuteNonQueryAsync();
+            if (commandResult == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+        public async Task UpdateAsync(Course course) //materia con el update HECHO
+        {
+            
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.materias " +
                                                                    $"SET nombre = '{course.GetName()}', comision = {course.GetComission()}" +
                                                                    $" WHERE id = {course.GetId()}");
@@ -65,18 +81,13 @@ namespace Persistance.Repositories
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
             {
-                throw new Exception("Error al actualizar la materia");
+                throw new Exception("Error al actualizar la materia");//TODO que hago si la query falla
             }
             if (resultadoComando > 1)
             {
                 throw new Exception("F");
             }
-            if (resultadoComando == 0)
-            {
-                return false; // no se actualizo materia
-            }
-            return true; //se actualizo exitosamente una materia
-
+            
         }
 
         public async Task GetStudentCoursesAsync(int idStudent)

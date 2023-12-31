@@ -436,19 +436,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\loren\\.nuget\\packages\\": {}
+    "C:\\Users\\franc\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\UniSmart.Contracts.csproj",
+      "projectUniqueName": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\UniSmart.Contracts.csproj",
       "projectName": "UniSmart.Contracts",
-      "projectPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\UniSmart.Contracts.csproj",
-      "packagesPath": "C:\\Users\\loren\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\loren\\OneDrive\\Documentos\\GitHub\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\obj\\",
+      "projectPath": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\UniSmart.Contracts.csproj",
+      "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\franc\\OneDrive\\Documentos\\universidadnikolay\\WizardUniversityOfNikolau\\WizardUniversityOfNikolaus\\Contracts\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\loren\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -495,7 +495,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

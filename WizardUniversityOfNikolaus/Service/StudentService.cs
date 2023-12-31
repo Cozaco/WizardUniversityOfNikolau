@@ -12,10 +12,24 @@ namespace Service
 {
     public class StudentService 
     {
-        //private readonly int contadorMaterias;
-        public async Task CreateAsync(Student student) //TODO Pasar los datos directamente y hacer el chequeo ahi
+        private bool InputCheck(string name, int age)
         {
-            await DataBase.GetInstance().studentRepository.CrearAsync(student);
+            if (name == "")
+            {
+                throw new Exception("You must complete the name space");
+            }
+            if (age < 18)
+            {
+                throw new Exception("The age number must be more than 18. If not, this child is a Genius! Also call 911. He knows too much!");
+            }
+            return true;
+        }
+        //private readonly int contadorMaterias;
+        public async Task<Student> CreateAsync(string name, int age) //TODO Pasar los datos directamente y hacer el chequeo ahi
+        {
+            if(!InputCheck(name, age)) { throw new Exception(); }
+            Student student = new Student (name, age);
+            return await DataBase.GetInstance().studentRepository.CreateAsync(student);
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -23,8 +37,14 @@ namespace Service
             return  await DataBase.GetInstance().studentRepository.DeleteAsync(id);
         }
 
-        public async Task<bool> UpdateAsync(Student student)//TODO pasar datos
+        public async Task<Student> UpdateAsync(int id, string oldName, int oldAge, string newName, int newAge)//TODO pasar datos
         {
+            if (!await DataBase.GetInstance().studentRepository.ValidateInfoAsync(id, oldName, oldAge))
+            {
+                throw new Exception("The student you want to update doesn't exist!!! He could be in another university, because he want to learn seriously!");
+            }
+            if(!InputCheck(newName, newAge)) {  throw new Exception(); }
+            Student student = new Student(newName, newAge, id);
             return await DataBase.GetInstance().studentRepository.UpdateAsync(student);
         }
 

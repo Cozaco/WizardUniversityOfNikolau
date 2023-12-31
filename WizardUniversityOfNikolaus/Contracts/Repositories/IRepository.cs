@@ -9,6 +9,6 @@ namespace UniSmart.Contracts.Repositories
 {
     public interface IRepository<T> //TODO tiene que tener create delete y upddate 
     {
-        public Task CreateAsync(T entity);
+        public Task<T> CreateAsync(T entity);
     }
 }

@@ -18,7 +18,7 @@ namespace Persistance.Repositories
             this.dataSource = dataSource;
         }
 
-        public async Task Create(Professor professor)
+        public async Task<Professor> CreateAsync(Professor professor)
         {
 
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.profesores (nombre,edad) " +
@@ -32,7 +32,7 @@ namespace Persistance.Repositories
 
             }
             professor.SetId(resultadoComando.Value);
-            return;
+            return professor;
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -57,7 +57,7 @@ namespace Persistance.Repositories
             return true; //se borró exitosamente un profesor
         }
 
-        public async Task<bool> UpdateAsync(Professor professor) //alumno con el update HECHO
+        public async Task<Professor> UpdateAsync(Professor professor) //alumno con el update HECHO
         {
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.profesores " +
                                                                    $"SET nombre = '{professor.GetName()}', edad = {professor.GetAge()}" +
@@ -66,7 +66,7 @@ namespace Persistance.Repositories
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
             {
-                throw new Exception("Error al actualizar el alumno");
+                throw new Exception("Error while updating the professor");
             }
             if (resultadoComando > 1)
             {
@@ -74,9 +74,9 @@ namespace Persistance.Repositories
             }
             if (resultadoComando == 0)
             {
-                return false; // no se actualizo profesor
+                throw new Exception("Error. No professor was afected"); // no se actualizo profesor
             }
-            return true; //se actualizo exitosamente un profesor
+            return professor; //se actualizo exitosamente un profesor
         }
 
         public async Task GetStudentProfessorsAsync(int idStudent)
@@ -180,6 +180,22 @@ namespace Persistance.Repositories
             }
             return true; //El profesor dejó la materia 
 
+        }
+
+        public async Task<bool> ValidateInfoAsync(int id, string name, int edad)
+        {
+            using NpgsqlCommand command = dataSource.CreateCommand($"SELECT * " +
+                                                                   $"FROM universidadnikolay.profesores " +
+                                                                   $"WHERE id = {id} " +
+                                                                   $"AND nombre={name} " +
+                                                                   $"AND edad={edad}");
+
+            int commandResult = await command.ExecuteNonQueryAsync();
+            if (commandResult == 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

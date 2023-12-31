@@ -1,4 +1,5 @@
 ﻿using Contracts.Models;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Contracts.Repositories
 {
     public interface IProfessorRepository
     {
-        public Task Create(Professor professor);
+        public Task<Professor> CreateAsync(Professor professor);
         public Task<bool> DeleteAsync(int idProfessor);
 
-        public Task<bool> UpdateAsync(Professor professor);
+        public Task<Professor> UpdateAsync(Professor professor);
 
         public Task GetStudentProfessorsAsync(int idStudent);
 
@@ -21,5 +22,6 @@ namespace Contracts.Repositories
         public Task<bool> TakeCourseAsync(int idProfessor, int idCourse);
 
         public Task<bool> LeaveCourseAsync(int idProfessor, int idCourse);
+        public Task<bool> ValidateInfoAsync(int id, string name, int edad);
     }
 }

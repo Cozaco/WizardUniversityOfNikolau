@@ -12,12 +12,12 @@ namespace Contracts.Repositories
     {
         //public Task CreateAsync(Course course); 
         public Task<bool> DeleteAsync(int idCourse);
-        public Task UpdateAsync(Course course);
+        public Task<Course> UpdateAsync(Course course);
 
         public Task GetStudentCoursesAsync(int idStudent);
 
         public Task GetProfessorCoursesAsync(int idProfessor);
 
-        public Task<bool> ValidateInfo(int id, string name, int comission);
+        public Task<bool> ValidateInfoAsync(int id, string name, int comission);
     }
 }

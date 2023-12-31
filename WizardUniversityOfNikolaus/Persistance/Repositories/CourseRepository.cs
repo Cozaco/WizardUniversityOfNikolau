@@ -17,7 +17,7 @@ namespace Persistance.Repositories
         {
             this.dataSource = dataSource;
         }
-        public async Task CreateAsync(Course course)
+        public async Task<Course> CreateAsync(Course course)
         {
 
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.materias (nombre, comision)" +
@@ -31,7 +31,7 @@ namespace Persistance.Repositories
 
             }
             course.SetId(resultadoComando.Value);
-            return;
+            return course;
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -56,7 +56,7 @@ namespace Persistance.Repositories
             return true; //se borró exitosamente una materia
         }
 
-        public async Task<bool> ValidateInfo(int id,string name,int comission)
+        public async Task<bool> ValidateInfoAsync(int id,string name,int comission)
         {
             using NpgsqlCommand command = dataSource.CreateCommand($"SELECT * " +
                                                                    $"FROM universidadnikolay.materias " +
@@ -71,7 +71,7 @@ namespace Persistance.Repositories
             }
             return false;
         }
-        public async Task UpdateAsync(Course course) //materia con el update HECHO
+        public async Task<Course> UpdateAsync(Course course) //materia con el update HECHO
         {
             
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.materias " +
@@ -87,7 +87,7 @@ namespace Persistance.Repositories
             {
                 throw new Exception("F");
             }
-            
+            return course;
         }
 
         public async Task GetStudentCoursesAsync(int idStudent)

@@ -9,11 +9,11 @@ namespace Contracts.Repositories
 {
     public interface IStudentRepository
     {
-        public Task CrearAsync(Student student);
+        public Task<Student> CreateAsync(Student student);
         
         public Task<bool> DeleteAsync(int idStudent);
 
-        public Task<bool> UpdateAsync(Student student);
+        public Task<Student> UpdateAsync(Student student);
 
         public Task GetCourseStudentsAsync(int idMateria);
 
@@ -24,6 +24,8 @@ namespace Contracts.Repositories
         public Task<bool> TakeCourseAsync(int idStudent, int idMateria);
 
         public Task<bool> LeaveCourseAsync(int idStudent, int idMateria);
+
+        public Task<bool> ValidateInfoAsync(int idStudent, string name, int age);
 
     }
 }

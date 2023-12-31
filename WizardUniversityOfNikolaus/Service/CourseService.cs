@@ -27,25 +27,29 @@ namespace Service
         {
             if (!InputCheck(name, comission)) { throw new Exception(); }
             Course course = new Course(name, comission);
-            await DataBase.GetInstance().courseRepository.CreateAsync(course);
-            return course;
+            return await DataBase.GetInstance().courseRepository.CreateAsync(course);
+            
         }
 
-        public Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id, string name, int comission)
         {
-            return DataBase.GetInstance().courseRepository.DeleteAsync(id);
+            if (!await DataBase.GetInstance().courseRepository.ValidateInfoAsync(id, name, comission))
+            { 
+                throw new Exception("The input is wrong, please check the info provided"); 
+            }
+            return await DataBase.GetInstance().courseRepository.DeleteAsync(id);
         }
 
         public async Task<Course> UpdateAsync(string oldName,int oldComission,string newName,int newComission,int idCourse)//TODO check
         {
-            if(await DataBase.GetInstance().courseRepository.ValidateInfo(idCourse, oldName, oldComission))
+            if(!await DataBase.GetInstance().courseRepository.ValidateInfoAsync(idCourse, oldName, oldComission))
             {
-                throw new Exception("The input is wrong, please check the info provided");//TODO como le hago llegar eso al usario?
+                throw new Exception("The input is wrong, please check the info provided");//TODO como le hago llegar eso al usuario?
             }
             if (!InputCheck(newName, newComission)) { throw new Exception(); }
             Course course = new Course(newName, newComission,idCourse);
-            await DataBase.GetInstance().courseRepository.UpdateAsync(course);
-            return course;
+            return await DataBase.GetInstance().courseRepository.UpdateAsync(course);
+            
         }
 
         public async Task GetStudentCoursesAsync(int idStudent)

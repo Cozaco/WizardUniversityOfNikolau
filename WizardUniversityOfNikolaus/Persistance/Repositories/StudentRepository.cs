@@ -20,7 +20,7 @@ namespace Persistance.Repositories
             this.dataSource = dataSource;
         }
 
-        public async Task CrearAsync(Student student)
+        public async Task<Student> CreateAsync(Student student)
         {
             
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos (nombre,edad) " +
@@ -34,7 +34,7 @@ namespace Persistance.Repositories
 
             }
             student.Id = resultadoComando.Value;
-            return;
+            return student;
         }
 
         public async Task<bool> DeleteAsync(int id)
@@ -59,7 +59,7 @@ namespace Persistance.Repositories
             return true; //se borró exitosamente un alumno
         }
 
-        public async Task<bool> UpdateAsync(Student student) //alumno con el update HECHO
+        public async Task<Student> UpdateAsync(Student student) //alumno con el update HECHO
         {
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.alumnos " +
                                                                    $"SET nombre = '{student.GetName()}', edad = {student.GetAge()} " +
@@ -76,9 +76,9 @@ namespace Persistance.Repositories
             }
             if (resultadoComando == 0)
             {
-                return false; // no se borró ningún alumnos
+                throw new Exception(); // no se borró ningún alumnos
             }
-            return true; //se borró exitosamente un alumno
+            return student; //se borró exitosamente un alumno
         }
         public async Task GetCourseStudentsAsync(int idCourse)
         {
@@ -174,6 +174,22 @@ namespace Persistance.Repositories
             }
             return true; //se desincribió exitosamente un alumno
 
+        }
+
+        public async Task<bool> ValidateInfoAsync(int id, string name, int edad)
+        {
+            using NpgsqlCommand command = dataSource.CreateCommand($"SELECT * " +
+                                                                   $"FROM universidadnikolay.alumnos " +
+                                                                   $"WHERE id = {id} " +
+                                                                   $"AND nombre={name} " +
+                                                                   $"AND edad={edad}");
+
+            int commandResult = await command.ExecuteNonQueryAsync();
+            if (commandResult == 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

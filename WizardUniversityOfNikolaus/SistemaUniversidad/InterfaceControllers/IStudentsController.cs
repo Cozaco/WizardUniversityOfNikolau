@@ -1,8 +1,8 @@
 ﻿using Contracts.Models;
 using Microsoft.AspNetCore.Mvc;
-using UniSmart.API.DTOs;
+using UniSmart.API.DTOs.Responses;
 
-namespace UniSmart.API.Controllers
+namespace UniSmart.API.InterfaceControllers
 {
     public interface IStudentsController
     {
@@ -10,7 +10,7 @@ namespace UniSmart.API.Controllers
 
         public Task<bool> DeleteAsync(int idStudent);
 
-        public Task<Student> UpdateAsync([FromBody]StudentDTO studentDto);
+        public Task<Student> UpdateAsync([FromBody] StudentDTO studentDto);
 
         public Task<List<Student>> GetCourseStudentsAsync(int idMateria);
 

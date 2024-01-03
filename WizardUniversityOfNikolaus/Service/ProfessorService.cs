@@ -52,14 +52,14 @@ namespace Service
             
         }
 
-        public async Task GetStudentProfessorsAsync(int idStudent)
+        public async Task<List<Professor>> GetStudentProfessorsAsync(int idStudent)
         {
-            await DataBase.GetInstance().professorRepository.GetStudentProfessorsAsync(idStudent);
+            return await DataBase.GetInstance().professorRepository.GetStudentProfessorsAsync(idStudent);
         }
 
-        public async Task GetCourseProfessorsAsync(int idCourse)
+        public async Task<List<Professor>> GetCourseProfessorsAsync(int idCourse)
         {
-            await DataBase.GetInstance().professorRepository.GetCourseProfessorsAsync(idCourse);
+            return await DataBase.GetInstance().professorRepository.GetCourseProfessorsAsync(idCourse);
         }
 
         public async Task<bool> TakeCourseAsync(int idProfessor, int idCourse)

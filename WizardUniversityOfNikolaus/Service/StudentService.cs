@@ -37,7 +37,7 @@ namespace Service
             return  await DataBase.GetInstance().studentRepository.DeleteAsync(id);
         }
 
-        public async Task<Student> UpdateAsync(int id, string oldName, int oldAge, string newName, int newAge)//TODO pasar datos
+        public async Task<Student> UpdateAsync(int id)//TODO pasar datos
         {
             if (!await DataBase.GetInstance().studentRepository.ValidateInfoAsync(id, oldName, oldAge))
             {

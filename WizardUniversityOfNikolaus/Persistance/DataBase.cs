@@ -13,7 +13,7 @@ namespace Persistance
     public class DataBase : IDisposable
     {
         private static DataBase? dataBaseInstance;
-        private static readonly NpgsqlDataSource dataSource = NpgsqlDataSource.Create("Host=127.0.0.1;Username=postgres;Password=loba2110;Database=postgres");
+        private static readonly NpgsqlDataSource dataSource = NpgsqlDataSource.Create("Host=127.0.0.1;Username=postgres;Password=0802;Database=postgres");
         public IStudentRepository studentRepository;
         public IProfessorRepository professorRepository;
         public ICourseRepository courseRepository;

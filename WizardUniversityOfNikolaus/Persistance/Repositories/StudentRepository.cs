@@ -24,7 +24,7 @@ namespace Persistance.Repositories
         {
             
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.alumnos (nombre,edad) " +
-                                                                   $"VALUES ('{student.GetName()}',{student.GetAge()}) " +
+                                                                   $"VALUES ('{student.Name}',{student.Age}) " +
                                                                    $"RETURNING id");
             
             int? resultadoComando=(int?)await command.ExecuteScalarAsync();
@@ -62,8 +62,8 @@ namespace Persistance.Repositories
         public async Task<Student> UpdateAsync(Student student) //alumno con el update HECHO
         {
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.alumnos " +
-                                                                   $"SET nombre = '{student.GetName()}', edad = {student.GetAge()} " +
-                                                                   $"WHERE id = {student.GetId()}");
+                                                                   $"SET nombre = '{student.Name} ', edad =  {student.Age} " +
+                                                                   $"WHERE id = {student.Id}");
             
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)

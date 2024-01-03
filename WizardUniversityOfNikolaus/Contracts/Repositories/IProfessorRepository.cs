@@ -15,9 +15,9 @@ namespace Contracts.Repositories
 
         public Task<Professor> UpdateAsync(Professor professor);
 
-        public Task GetStudentProfessorsAsync(int idStudent);
+        public Task<List<Professor>> GetStudentProfessorsAsync(int idStudent);
 
-        public Task GetCourseProfessorsAsync(int idCourse);
+        public Task<List<Professor>> GetCourseProfessorsAsync(int idCourse);
 
         public Task<bool> TakeCourseAsync(int idProfessor, int idCourse);
 

@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Contracts.Models;
 using Service; // es todo service lo que hay q importar? O podemos solo llamar a student service? por que a cualquier de las 2 posibilidades
-using UniSmart.API.DTOs;
 using System.Net.Cache;
-using UniSmart.API.Controllers;
+using UniSmart.API.InterfaceControllers;
 using UniSmart.Service;
+using UniSmart.API.DTOs.Responses;
 
 namespace SistemaUniversidad.Controllers
 {
@@ -24,8 +24,8 @@ namespace SistemaUniversidad.Controllers
         [HttpPost]
         public async Task<StudentDTO> CreateAsync([FromBody] StudentDTO dto)
         {
-            Student student = await ServiceSingleton.GetInstance().studentService.CreateAsync(dto.GetName(), dto.GetAge());
-            StudentDTO studentdto = new StudentDTO(student.GetName(), student.GetAge(), student.GetId());
+            Student student = await ServiceSingleton.GetInstance().studentService.CreateAsync(dto.Name, dto.Age);
+            StudentDTO studentdto = new StudentDTO(student.Name, student.Age, student.Id);
             return studentdto;
         }
 
@@ -35,18 +35,19 @@ namespace SistemaUniversidad.Controllers
             return await ServiceSingleton.GetInstance().studentService.DeleteAsync(idStudent);
         }
 
-        [HttpGet("course/{idCourse}")]
-        public async Task<List<Student>> GetCourseStudentsAsync(int idCourse)
+        [HttpGet("courses/{idCourse}")]
+        public async Task<List<Student>> GetCourseStudentsAsync(int idCourse) //TODO cambiar todos los students por studentsDTO
         {
-            return await ServiceSingleton.GetInstance().studentService.GetCourseStudentsAsync(idCourse);
+            var list = await ServiceSingleton.GetInstance().studentService.GetCourseStudentsAsync(idCourse);
+            return list;
         }
 
-        [HttpGet("profesor/{idProfessor}")]
+        [HttpGet("professors/{idProfessor}")]
         public async Task<List<Student>> GetProfessorStudentsAsync(int idProfessor)
         {
             return await ServiceSingleton.GetInstance().studentService.GetProfessorStudentsAsync(idProfessor);
         }
-        [HttpDelete("{idStudent}/{idCourse}")]
+        [HttpDelete("{idStudent}/courses/{idCourse}")]
         public async Task<bool> LeaveCourseAsync(int idStudent, int idCourse)
         {
             return await ServiceSingleton.GetInstance().studentService.LeaveCourseAsync(idStudent, idCourse); 
@@ -58,11 +59,11 @@ namespace SistemaUniversidad.Controllers
             return await ServiceSingleton.GetInstance().studentService.TakeCourseAsync(idStudent, idCourse);
         }
 
-        [HttpPut("{id}/{oldName}/{oldAge}/{newName}/{newAge}")]
+        [HttpPut("{id}")]
 
-        public async Task<Student> UpdateAsync(int id, string oldName, int oldAge, string newName, int newAge)
+        public async Task<Student> UpdateAsync(int id) //TODO que reciba un DTO [FromBody]
         {
-            return await ServiceSingleton.GetInstance().studentService.UpdateAsync(id,oldName,oldAge,newName,newAge);
+            return await ServiceSingleton.GetInstance().studentService.UpdateAsync(id);
         }
 
         // TODO hacer GetId en repository y service y agregarlo aca. Agregar las demas funciones

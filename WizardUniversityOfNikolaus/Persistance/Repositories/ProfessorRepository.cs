@@ -22,7 +22,7 @@ namespace Persistance.Repositories
         {
 
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.profesores (nombre,edad) " +
-                                                                   $"VALUES ('{professor.GetName()}',{professor.GetAge()}) " +
+                                                                   $"VALUES ('{professor.Name}',{professor.Age}) " +
                                                                    $"RETURNING id");
             
             int? resultadoComando = (int?) await command.ExecuteScalarAsync();
@@ -31,7 +31,7 @@ namespace Persistance.Repositories
                 throw new Exception("No se pudo agregar profesor");
 
             }
-            professor.SetId(resultadoComando.Value);
+            professor.Id = resultadoComando.Value;
             return professor;
         }
 
@@ -60,8 +60,8 @@ namespace Persistance.Repositories
         public async Task<Professor> UpdateAsync(Professor professor) //alumno con el update HECHO
         {
             using NpgsqlCommand command = dataSource.CreateCommand($"UPDATE universidadnikolay.profesores " +
-                                                                   $"SET nombre = '{professor.GetName()}', edad = {professor.GetAge()}" +
-                                                                   $" WHERE id = {professor.GetId()}");
+                                                                   $"SET nombre = '{professor.Name}', edad = {professor.Age}" +
+                                                                   $" WHERE id = {professor.Id}");
             
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
@@ -79,7 +79,7 @@ namespace Persistance.Repositories
             return professor; //se actualizo exitosamente un profesor
         }
 
-        public async Task GetStudentProfessorsAsync(int idStudent)
+        public async Task<List<Professor>> GetStudentProfessorsAsync(int idStudent)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT profesores.id,profesores.nombre " +
                                                                         $"FROM universidadnikolay.profesores " +
@@ -90,20 +90,16 @@ namespace Persistance.Repositories
                                                                         $"WHERE alumnos_cursan.alumno_id={idStudent}");
 
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
-            List<Professor> profesores = new List<Professor>();
+            List<Professor> professors = new List<Professor>();
             while (reader.Read())
             {
-                Professor profesor = new Professor(reader.GetString(1), reader.GetInt32(0));
-                profesores.Add(profesor);
+                Professor professor = new Professor(reader.GetString(1), reader.GetInt32(0));
+                professors.Add(professor);
             }
-            foreach (Professor profesor in profesores)
-            {
-                Console.WriteLine($"ID:{profesor.GetId()}");
-                Console.WriteLine($"Nombre:{profesor.GetName()}");
-            }
+            return professors;
         }
 
-        public async Task GetCourseProfessorsAsync(int idCourse)
+        public async Task<List<Professor>> GetCourseProfessorsAsync(int idCourse)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT profesores.id,profesores.nombre,profesores.edad " +
                                                                         $"FROM universidadnikolay.profesores " +
@@ -112,18 +108,13 @@ namespace Persistance.Repositories
                                                                         $"WHERE profesores_dictan.materia_id={idCourse}");
 
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
-            List<Professor> profesoresEnLaMateria = new List<Professor>();
+            List<Professor> professors = new List<Professor>();
             while (reader.Read())
             {
                 Professor profesor = new Professor(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
-                profesoresEnLaMateria.Add(profesor);
+                professors.Add(profesor);
             }
-            foreach (Professor profesor in profesoresEnLaMateria)
-            {
-                Console.WriteLine($"ID:{profesor.GetId()}");
-                Console.WriteLine($"Nombre:{profesor.GetName()}");
-                Console.WriteLine($"Nombre:{profesor.GetAge()}");
-            }
+            return professors;
         }
 
         public async Task<bool> TakeCourseAsync(int idProfessor, int idCourse)

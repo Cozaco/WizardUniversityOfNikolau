@@ -1,4 +1,4 @@
-﻿namespace UniSmart.API.DTOs
+﻿namespace UniSmart.API.DTOs.Responses
 {
     public class StudentDTO : UserDTO
     {

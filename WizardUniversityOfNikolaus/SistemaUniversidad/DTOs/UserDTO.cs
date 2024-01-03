@@ -6,7 +6,7 @@
         private string name;
         private int age;
 
-
+        public UserDTO() { }//TODO User con constructor vacío? El name va poder ser vacío?
         public UserDTO(string name, int age, int? id = null)
         {
             this.name = name;

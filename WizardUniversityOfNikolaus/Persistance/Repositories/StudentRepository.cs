@@ -80,7 +80,7 @@ namespace Persistance.Repositories
             }
             return student; //se borró exitosamente un alumno
         }
-        public async Task GetCourseStudentsAsync(int idCourse)
+        public async Task<List<Student>> GetCourseStudentsAsync(int idCourse)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT alumnos.id,alumnos.nombre,alumnos.edad " +
                                                                         $"FROM universidadnikolay.alumnos " +
@@ -89,21 +89,16 @@ namespace Persistance.Repositories
                                                                         $"WHERE alumnos_cursan.materia_id={idCourse}");
             
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
-            List<Professor> alumnosEnLaMateria = new List<Professor>();
+            List<Student> students = new List<Student>();
             while (reader.Read())
             {
-                Professor alumno = new Professor(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
-                alumnosEnLaMateria.Add(alumno);
+                Student student = new Student(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0)); //TODO Mapeo para no tener que cambiar los numeros cuando agrego una tabla
+                students.Add(student);
             }
-            foreach (Professor alumno in alumnosEnLaMateria)
-            {
-                Console.WriteLine($"ID:{alumno.GetId()}");
-                Console.WriteLine($"Nombre:{alumno.GetName()}");
-                Console.WriteLine($"Nombre:{alumno.GetAge()}");
-            }
+            return students;
         }
 
-        public async Task GetProfessorStudentsAsync(int idProfessor)
+        public async Task<List<Student>> GetProfessorStudentsAsync(int idProfessor)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT alumnos.id,alumnos.nombre " +
                                                                         $"FROM universidadnikolay.alumnos " +
@@ -114,17 +109,13 @@ namespace Persistance.Repositories
                                                                         $"WHERE profesores_dictan.profesor_id={idProfessor}");
             
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
-            List<Professor> alumnos = new List<Professor>();
+            List<Student> students = new List<Student>();
             while (reader.Read())
             {
-                Professor alumno = new Professor(reader.GetString(1), reader.GetInt32(0));
-                alumnos.Add(alumno);
+                Student student = new Student(reader.GetString(1), reader.GetInt32(0));
+                students.Add(student);
             }
-            foreach (Professor profesor in alumnos)
-            {
-                Console.WriteLine($"ID:{profesor.GetId()}");
-                Console.WriteLine($"Nombre:{profesor.GetName()}");
-            }
+            return students;
         }
 
         public async Task<long> CountCoursesAsync(int idStudent)

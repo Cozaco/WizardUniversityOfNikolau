@@ -48,14 +48,14 @@ namespace Service
             return await DataBase.GetInstance().studentRepository.UpdateAsync(student);
         }
 
-        public async Task GetCourseStudentsAsync(int idCourse)
+        public async Task<List<Student>> GetCourseStudentsAsync(int idCourse)
         {
-            await DataBase.GetInstance().studentRepository.GetCourseStudentsAsync(idCourse);
+            return await DataBase.GetInstance().studentRepository.GetCourseStudentsAsync(idCourse);
         }
 
-        public async Task GetProfessorStudentsAsync(int idProfessor)
+        public async Task<List<Student>> GetProfessorStudentsAsync(int idProfessor)
         {
-            await DataBase.GetInstance().studentRepository.GetProfessorStudentsAsync(idProfessor);
+           return await DataBase.GetInstance().studentRepository.GetProfessorStudentsAsync(idProfessor);
         }
 
         //Inscribir alumno en la materia. Primero se cuenta cuantas materias cursa, se chequea con el máximo de materias disponibles y de pasar,

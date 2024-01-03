@@ -15,15 +15,15 @@ namespace Contracts.Repositories
 
         public Task<Student> UpdateAsync(Student student);
 
-        public Task GetCourseStudentsAsync(int idMateria);
+        public Task<List<Student>> GetCourseStudentsAsync(int idCourse);
 
-        public Task GetProfessorStudentsAsync(int idProfessor);
+        public Task<List<Student>> GetProfessorStudentsAsync(int idProfessor);
 
         public Task<long> CountCoursesAsync(int idStudent);
 
-        public Task<bool> TakeCourseAsync(int idStudent, int idMateria);
+        public Task<bool> TakeCourseAsync(int idStudent, int idCourse);
 
-        public Task<bool> LeaveCourseAsync(int idStudent, int idMateria);
+        public Task<bool> LeaveCourseAsync(int idStudent, int idCourse);
 
         public Task<bool> ValidateInfoAsync(int idStudent, string name, int age);
 

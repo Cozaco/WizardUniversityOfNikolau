@@ -31,21 +31,13 @@ namespace Service
             return await DataBase.GetInstance().professorRepository.CreateAsync(professor);
         }
 
-        public async Task<bool> DeleteAsync(int id, string name, int age)
+        public async Task<bool> DeleteAsync(int id)
         {
-            if (!await DataBase.GetInstance().professorRepository.ValidateInfoAsync(id, name, age))
-            {
-                throw new Exception("The input is wrong, please check the info provided");
-            }
             return await DataBase.GetInstance().professorRepository.DeleteAsync(id);
         }
 
-        public async Task<Professor> UpdateAsync(int idProfessor, string oldName, int oldAge, string newName, int newAge)//TODO Aca también los datos
+        public async Task<Professor> UpdateAsync(int idProfessor, string newName, int newAge)//TODO Aca también los datos
         {
-            if (!await DataBase.GetInstance().professorRepository.ValidateInfoAsync(idProfessor, oldName, oldAge))
-            {
-                throw new Exception("The input is wrong, please check the info provided");
-            }
             if(!InputCheck(newName, newAge)) { throw new Exception(); }
             Professor professor = new Professor(newName, newAge, idProfessor );
             return await DataBase.GetInstance().professorRepository.UpdateAsync(professor); //Cambia las caracteristicas de professor?

@@ -26,10 +26,9 @@ namespace SistemaUniversidad.Controllers
         {
             Student student = await ServiceSingleton.GetInstance().studentService.CreateAsync(dto.Name, dto.Age);
             StudentDTO studentdto = new StudentDTO(student.Name, student.Age, student.Id);
-            return studentdto;
         }
 
-        [HttpDelete("{idStudent}")]//TODO como corno funciona.(el tema del parametro)        
+        [HttpDelete("{idStudent}")]     
         public async Task<bool> DeleteAsync(int idStudent)
         {
             return await ServiceSingleton.GetInstance().studentService.DeleteAsync(idStudent);
@@ -47,6 +46,7 @@ namespace SistemaUniversidad.Controllers
         {
             return await ServiceSingleton.GetInstance().studentService.GetProfessorStudentsAsync(idProfessor);
         }
+
         [HttpDelete("{idStudent}/courses/{idCourse}")]
         public async Task<bool> LeaveCourseAsync(int idStudent, int idCourse)
         {
@@ -60,10 +60,9 @@ namespace SistemaUniversidad.Controllers
         }
 
         [HttpPut("{id}")]
-
-        public async Task<Student> UpdateAsync(int id) //TODO que reciba un DTO [FromBody]
+        public async Task<Student> UpdateAsync([FromBody] StudentDTO dto) //TODO puse el DTO, como veo si el ID esta bien
         {
-            return await ServiceSingleton.GetInstance().studentService.UpdateAsync(id);
+            return await ServiceSingleton.GetInstance().studentService.UpdateAsync((int)dto.Id, dto.Name, dto.Age);
         }
 
         // TODO hacer GetId en repository y service y agregarlo aca. Agregar las demas funciones

@@ -37,13 +37,9 @@ namespace Service
             return  await DataBase.GetInstance().studentRepository.DeleteAsync(id);
         }
 
-        public async Task<Student> UpdateAsync(int id)//TODO pasar datos
+        public async Task<Student> UpdateAsync(int id, string newName, int newAge)//TODO pasar datos
         {
-            if (!await DataBase.GetInstance().studentRepository.ValidateInfoAsync(id, oldName, oldAge))
-            {
-                throw new Exception("The student you want to update doesn't exist!!! He could be in another university, because he want to learn seriously!");
-            }
-            if(!InputCheck(newName, newAge)) {  throw new Exception(); }
+            if (!InputCheck(newName, newAge)) { throw new Exception(); }
             Student student = new Student(newName, newAge, id);
             return await DataBase.GetInstance().studentRepository.UpdateAsync(student);
         }

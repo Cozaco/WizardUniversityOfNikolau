@@ -14,12 +14,12 @@ namespace Contracts.Repositories
         public Task<bool> DeleteAsync(int idCourse);
         public Task<Course> UpdateAsync(Course course);
 
-        public Task GetStudentCoursesAsync(int idStudent);
+        public Task<List<Course>> GetStudentCoursesAsync(int idStudent);
 
-        public Task GetProfessorCoursesAsync(int idProfessor);
+        public Task<List<Course>> GetProfessorCoursesAsync(int idProfessor);
 
         public Task<bool> ValidateInfoAsync(int id, string name, int comission);
 
-        public Task<Course> GetCourseAsync(int idCourse);
+        public Task<Course> GetByIdAsync(int idCourse);
     }
 }

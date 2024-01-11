@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace UniSmart.Contracts.Exceptions
 {
-    public class ExpectedException : Exception
+    public abstract class ExpectedException : Exception
     {
+        public int Code { get; set; }
         public ExpectedException() { }
     }
 }

@@ -90,7 +90,7 @@ namespace Persistance.Repositories
             return course;
         }
 
-        public async Task GetStudentCoursesAsync(int idStudent)
+        public async Task<List<Course>> GetStudentCoursesAsync(int idStudent)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT materias.id,materias.nombre " +
                                                                         $"FROM universidadnikolay.materias " +
@@ -99,20 +99,16 @@ namespace Persistance.Repositories
                                                                         $"WHERE alumnos_cursan.alumno_id={idStudent}");
             
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
-            List<Course> materiasQueCursa = new List<Course>();
+            List<Course> studentCourses = new List<Course>();
             while (reader.Read())
             {
                 Course materia = new Course(reader.GetString(1), reader.GetInt32(0));
-                materiasQueCursa.Add(materia);
+                studentCourses.Add(materia);
             }
-            foreach (Course materia in materiasQueCursa)
-            {
-                Console.WriteLine($"ID:{materia.GetId()}");
-                Console.WriteLine($"Nombre:{materia.GetName()}");
-            }
+            return studentCourses;
         }
 
-        public async Task GetProfessorCoursesAsync(int idProfessor)
+        public async Task<List<Course>> GetProfessorCoursesAsync(int idProfessor)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT materias.id,materias.nombre " +
                                                                         $"FROM universidadnikolay.materias " +
@@ -121,20 +117,16 @@ namespace Persistance.Repositories
                                                                         $"WHERE profesores_dictan.profesor_id={idProfessor}");
             
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
-            List<Course> materiasQueCursa = new List<Course>();
+            List<Course> professorCourses = new List<Course>();
             while (reader.Read())
             {
                 Course materia = new Course(reader.GetString(1), reader.GetInt32(0));
-                materiasQueCursa.Add(materia);
+                professorCourses.Add(materia);
             }
-            foreach (Course materia in materiasQueCursa)
-            {
-                Console.WriteLine($"ID:{materia.GetId()}");
-                Console.WriteLine($"Nombre:{materia.GetName()}");
-            }
+            return professorCourses;
         }
 
-        public async Task<Course> GetCourseAsync(int idCourse)
+        public async Task<Course> GetByIdAsync(int idCourse)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
                                                                        $"FROM universidadnikolay.materias" +

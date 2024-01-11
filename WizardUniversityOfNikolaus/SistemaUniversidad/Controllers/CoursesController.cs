@@ -14,9 +14,9 @@ namespace UniSmart.API.ControllersSS
     public class CoursesController : ControllerBase
     {
         [HttpGet("{id}")]
-        public async Task<ActionResult<CourseDTO>> GetCourseAsync(int id)
+        public async Task<ActionResult<CourseDTO>> GetByIdAsync(int id)
         {
-            Course course = await ServiceSingleton.GetInstance().courseService.GetCourseAsync(id);
+            Course course = await ServiceSingleton.GetInstance().courseService.GetByIdAsync(id);
             CourseDTO output = new CourseDTO(course.Name,course.Comission,course.Id);
             return Ok(output);     
         }
@@ -24,7 +24,7 @@ namespace UniSmart.API.ControllersSS
         [HttpGet("{idCourse}/students")]
         public async Task<ActionResult<List<StudentDTO>>> GetStudents(int idCourse)
         {
-            List<Student> students = await ServiceSingleton.GetInstance().courseService.GetStudents(idCourse);
+            List<Student> students = await ServiceSingleton.GetInstance().courseService.GetStudentsAsync(idCourse);
             List<StudentDTO> output = new List<StudentDTO>();
             foreach (Student student in students)
             {

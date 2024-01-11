@@ -27,7 +27,7 @@ namespace Contracts.Repositories
 
         public Task<bool> ValidateInfoAsync(int idStudent, string name, int age);
 
-        public Task<Student> GetStudentAsync(int idStudent);
+        public Task<Student> GetByIdAsync(int idStudent);
 
     }
 }

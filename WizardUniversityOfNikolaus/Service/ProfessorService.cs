@@ -6,20 +6,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using UniSmart.Contracts.Services;
 
 namespace Service
 {
-    public class ProfessorService 
+    public class ProfessorService : IProfessorService
     {
-        public async Task<List<Student>> GetProfessorStudentsAsync(int idProfessor)
+        public async Task<Professor> CreateAsync(string name, int age)
+        {
+            InputCheck(name, age);
+            Professor professor = new Professor(name, age);
+            return await DataBase.GetInstance().professorRepository.CreateAsync(professor);
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            await DataBase.GetInstance().professorRepository.DeleteAsync(id);
+        }
+
+        public async Task<Professor> UpdateAsync(string newName, int newAge, int idProfessor)
+        {
+            InputCheck(newName, newAge);
+            Professor professor = new Professor(newName, newAge, idProfessor );
+            return await DataBase.GetInstance().professorRepository.UpdateAsync(professor); //Cambia las caracteristicas de professor?         
+        }
+        public async Task<Professor> GetByIdAsync(int id)
+        {
+            return await DataBase.GetInstance().professorRepository.GetByIdAsync(id);
+        }
+        public async Task<List<Student>> GetStudentsAsync(int idProfessor)
         {
             return await DataBase.GetInstance().studentRepository.GetProfessorStudentsAsync(idProfessor);
         }
-        public async Task GetProfessorCoursesAsync(int idProfessor)
+        public async Task<List<Course>> GetCoursesAsync(int idProfessor)
         {
-            await DataBase.GetInstance().courseRepository.GetProfessorCoursesAsync(idProfessor);
+            return await DataBase.GetInstance().courseRepository.GetProfessorCoursesAsync(idProfessor);
         }
-        private bool InputCheck(string name, int age)
+        public void InputCheck(string name, int age)
         {
             if (name == "")
             {
@@ -29,33 +52,6 @@ namespace Service
             {
                 throw new Exception("The age number must be more than 18. If not, it is child labour! Call 911");
             }
-            return true;
         }
-
-        public async Task<Professor> CreateAsync(string name, int age)//TODO le tengo que pasar los datos no un profesor
-        {
-            if(!InputCheck(name, age)) { throw new Exception(); }
-            Professor professor = new Professor(name, age);
-            return await DataBase.GetInstance().professorRepository.CreateAsync(professor);
-        }
-
-        public async Task<bool> DeleteAsync(int id)
-        {
-            return await DataBase.GetInstance().professorRepository.DeleteAsync(id);
-        }
-
-        public async Task<Professor> UpdateAsync(int idProfessor, string newName, int newAge)//TODO Aca también los datos
-        {
-            if(!InputCheck(newName, newAge)) { throw new Exception(); }
-            Professor professor = new Professor(newName, newAge, idProfessor );
-            return await DataBase.GetInstance().professorRepository.UpdateAsync(professor); //Cambia las caracteristicas de professor?
-            
-        }
-
-        
-
-        
-
-       
     }
 }

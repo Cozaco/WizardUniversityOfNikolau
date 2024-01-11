@@ -34,15 +34,15 @@ namespace UniSmart.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<bool> DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
-            return await ServiceSingleton.GetInstance().studentService.DeleteAsync(id);
+            await ServiceSingleton.GetInstance().studentService.DeleteAsync(id);
         }
 
         [HttpPut("{id}")]
         public async Task<Student> UpdateAsync([FromBody] StudentDTO dto) //TODO que reciba un DTO [FromBody]
         {
-            return await ServiceSingleton.GetInstance().studentService.UpdateAsync((int)dto.Id, dto.Name, dto.Age);
+            return await ServiceSingleton.GetInstance().studentService.UpdateAsync( dto.Name, dto.Age, (int)dto.Id);
         }
     }
 }

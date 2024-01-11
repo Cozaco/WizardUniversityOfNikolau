@@ -189,7 +189,7 @@ namespace Persistance.Repositories
             return false;
         }
 
-        public async Task<Professor> GetProfessorAsync(int idProfessor)
+        public async Task<Professor> GetByIdAsync(int idProfessor)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
                                                                        $"FROM universidadnikolay.profesores" +

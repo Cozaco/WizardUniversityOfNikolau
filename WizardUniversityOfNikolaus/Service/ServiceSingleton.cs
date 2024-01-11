@@ -1,21 +1,22 @@
-﻿using Contracts.Repositories;
-using Npgsql;
+﻿using Contracts.Models;
 using Persistance;
-using Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using UniSmart.Contracts.Services;
+using Service;
 
 namespace UniSmart.Service
 {
     public class ServiceSingleton //TODO Hacer singleton como en Database
     {
         private static ServiceSingleton? serviceInstance;
-        public StudentService studentService;
-        public ProfessorService professorService;
-        public CourseService courseService;
+        public IStudentService studentService;
+        public IProfessorService professorService;
+        public ICourseService courseService;
 
         private ServiceSingleton()
         {

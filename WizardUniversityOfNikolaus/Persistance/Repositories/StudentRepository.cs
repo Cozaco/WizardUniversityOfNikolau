@@ -8,7 +8,7 @@ using Contracts.Repositories;
 using Contracts.Models;
 using Npgsql;
 using NpgsqlTypes;
-using UniSmart.Contracts.Models.Exceptions;
+using UniSmart.Contracts.Exceptions;
 
 namespace Persistance.Repositories
 {
@@ -189,7 +189,7 @@ namespace Persistance.Repositories
             return false;
         }
 
-        public async Task<Student> GetStudentAsync(int idStudent)
+        public async Task<Student> GetByIdAsync(int idStudent)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
                                                                        $"FROM universidadnikolay.alumnos" +

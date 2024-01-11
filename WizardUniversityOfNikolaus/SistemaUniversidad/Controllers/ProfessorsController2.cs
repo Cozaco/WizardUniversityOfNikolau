@@ -13,11 +13,24 @@ namespace UniSmart.API.Controllers
     [Route("professors")]
     public class ProfessorsControler2 : ControllerBase
     {
-        [HttpGet]
-        public async Task<StudentDTO> GetProfessorAsync([FromBody] StudentDTO dto)
+        [HttpGet("{idProfessor}")]
+        public async Task<ProfessorDTO> GetProfessorAsync(int idProfessor)//TODO Es para devolver un profesor?
         {
 
         }
+        
+        [HttpGet("{idProfessor}/students")]
+        public async Task<List<StudentDTO>> GetStudents(int idProfessor)
+        {
+
+        }
+
+        [HttpGet("{idProfessor}/courses")]
+        public async Task<List<CourseDTO>> GetCourses(int idProfessor)
+        {
+
+        }
+
         [HttpPost]
         public async Task<ProfessorDTO> CreateAsync([FromBody] ProfessorCreateDTO dto)
         {
@@ -31,9 +44,9 @@ namespace UniSmart.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ProfessorDTO> UpdateAsync([FromBody] ProfessorDTO dto) //TODO devuelve un professor, deberia devolver un DTO?
+        public async Task<ProfessorDTO> UpdateAsync([FromBody] ProfessorCreateDTO dto,int id) 
         {
-            Professor professor = await ServiceSingleton.GetInstance().professorService.UpdateAsync((int)dto.Id, dto.Name, dto.Age);
+            Professor professor = await ServiceSingleton.GetInstance().professorService.UpdateAsync(id, dto.Name, dto.Age);
             return new ProfessorDTO(); //TODO terminar esto
         }
     }

@@ -6,7 +6,7 @@
         public int Age { get; init; }
 
         public UserCreateDTO() { }//TODO User con constructor vacío? El name va poder ser vacío?
-        public UserCreateDTO(string name, int age, int? id = null)
+        public UserCreateDTO(string name, int age)
         {
             Name = name;
             Age = age;

@@ -12,6 +12,16 @@ namespace Service
 {
     public class StudentService 
     {
+        public async Task GetStudentCoursesAsync(int idStudent)
+        {
+            await DataBase.GetInstance().courseRepository.GetStudentCoursesAsync(idStudent);
+        }
+
+        public async Task<List<Professor>> GetStudentProfessorsAsync(int idStudent)
+        {
+            return await DataBase.GetInstance().professorRepository.GetStudentProfessorsAsync(idStudent);
+        }
+
         private bool InputCheck(string name, int age)
         {
             if (name == "")
@@ -43,48 +53,6 @@ namespace Service
             Student student = new Student(newName, newAge, id);
             return await DataBase.GetInstance().studentRepository.UpdateAsync(student);
         }
-
-        public async Task<List<Student>> GetCourseStudentsAsync(int idCourse)
-        {
-            return await DataBase.GetInstance().studentRepository.GetCourseStudentsAsync(idCourse);
-        }
-
-        public async Task<List<Student>> GetProfessorStudentsAsync(int idProfessor)
-        {
-           return await DataBase.GetInstance().studentRepository.GetProfessorStudentsAsync(idProfessor);
-        }
-
-        //Inscribir alumno en la materia. Primero se cuenta cuantas materias cursa, se chequea con el máximo de materias disponibles y de pasar,
-        //se inscribe al alumno en la materia.
-        public async Task<bool> TakeCourseAsync(int idStudent, int idCourse)//TODO mirar lo del try
-        {
-            //try
-            //{
-            //    int? materiasCursadas =(int) await DataBase.GetInstance().alumnoRepository.CountMateriasAsync(idAlumno);
-
-            //    if (materiasCursadas.HasValue && materiasCursadas >= 2)
-            //    {
-            //        return false;
-            //    }
-            //}
-            //catch
-            //{
-            //    return false;
-            //}
-            //return await DataBase.GetInstance().alumnoRepository.InsertAlumnoEnMateriaAsync(idAlumno, idMateria);
-            int? materiasCursadas = (int)await DataBase.GetInstance().studentRepository.CountCoursesAsync(idStudent);
-
-            if (materiasCursadas.HasValue && materiasCursadas >= 2)
-            {
-                return false;
-            }
-            return await DataBase.GetInstance().studentRepository.TakeCourseAsync(idStudent, idCourse);
-        }
-
-
-        public async Task<bool> LeaveCourseAsync(int idAlumno, int idMateria)
-        {
-            return await DataBase.GetInstance().studentRepository.LeaveCourseAsync(idAlumno, idMateria);
-        }
+        
     }
 }

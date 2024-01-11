@@ -188,5 +188,15 @@ namespace Persistance.Repositories
             }
             return false;
         }
+
+        public async Task<Professor> GetProfessorAsync(int idProfessor)
+        {
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
+                                                                       $"FROM universidadnikolay.profesores" +
+                                                                       $"WHERE profesores.id={idProfessor}");
+            using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            Professor professor = new Professor(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
+            return professor;
+        }
     }
 }

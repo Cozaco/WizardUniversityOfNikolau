@@ -11,6 +11,14 @@ namespace Service
 {
     public class ProfessorService 
     {
+        public async Task<List<Student>> GetProfessorStudentsAsync(int idProfessor)
+        {
+            return await DataBase.GetInstance().studentRepository.GetProfessorStudentsAsync(idProfessor);
+        }
+        public async Task GetProfessorCoursesAsync(int idProfessor)
+        {
+            await DataBase.GetInstance().courseRepository.GetProfessorCoursesAsync(idProfessor);
+        }
         private bool InputCheck(string name, int age)
         {
             if (name == "")
@@ -44,24 +52,10 @@ namespace Service
             
         }
 
-        public async Task<List<Professor>> GetStudentProfessorsAsync(int idStudent)
-        {
-            return await DataBase.GetInstance().professorRepository.GetStudentProfessorsAsync(idStudent);
-        }
+        
 
-        public async Task<List<Professor>> GetCourseProfessorsAsync(int idCourse)
-        {
-            return await DataBase.GetInstance().professorRepository.GetCourseProfessorsAsync(idCourse);
-        }
+        
 
-        public async Task<bool> TakeCourseAsync(int idProfessor, int idCourse)
-        {
-            return await DataBase.GetInstance().professorRepository.TakeCourseAsync(idProfessor, idCourse);
-        }
-
-        public async Task<bool> LeaveCourseAsync(int idProfessor, int idCourse)
-        {
-            return await DataBase.GetInstance().professorRepository.LeaveCourseAsync(idProfessor,idCourse);
-        }
+       
     }
 }

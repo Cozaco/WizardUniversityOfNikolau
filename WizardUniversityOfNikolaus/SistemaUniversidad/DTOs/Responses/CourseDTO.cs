@@ -2,15 +2,15 @@
 {
     public class CourseDTO
     {
-        private int? id;
-        private string name;
-        private int comission;
+        public int? Id { get; init; }
+        public string Name { get; init; }
+        public int Comission { get; init; }
 
         public CourseDTO(string name, int comission, int? id = null)
         {
-            this.name = name;
-            this.id = id;
-            this.comission = comission;
+            this.Name = name;
+            this.Id = id;
+            this.Comission = comission;
         }
 
         public CourseDTO() { }

@@ -8,34 +8,34 @@ namespace Contracts.Models
 {
     public class Course
     {
-        private int? id;
-        private string name;
-        private int comission;
+        public int? Id { get; set; }
+        public string Name { get; set; }
+        public int Comission { get; set; }
 
         public Course(string name, int comission, int? id = null)
         {
-            this.name = name;
-            this.id = id;
-            this.comission = comission;
+            this.Name = name;
+            this.Id = id;
+            this.Comission = comission;
         }
         public string GetName()
         {
-            return name;
+            return Name;
         }
 
         public int? GetId()
         {
-            return id;
+            return Id;
         }
 
         public void SetId(int id)
         {
-            this.id = id;
+            this.Id = id;
         }
 
         public int GetComission()
         {
-            return this.comission;
+            return this.Comission;
         }
     }
 }

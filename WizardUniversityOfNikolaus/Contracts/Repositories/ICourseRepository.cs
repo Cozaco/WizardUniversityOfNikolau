@@ -19,5 +19,7 @@ namespace Contracts.Repositories
         public Task GetProfessorCoursesAsync(int idProfessor);
 
         public Task<bool> ValidateInfoAsync(int id, string name, int comission);
+
+        public Task<Course> GetCourseAsync(int idCourse);
     }
 }

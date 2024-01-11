@@ -133,5 +133,19 @@ namespace Persistance.Repositories
                 Console.WriteLine($"Nombre:{materia.GetName()}");
             }
         }
+
+        public async Task<Course> GetCourseAsync(int idCourse)
+        {
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
+                                                                       $"FROM universidadnikolay.materias" +
+                                                                       $"WHERE materias.id={idCourse}");
+            using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            if (reader.Read() == false)
+            {
+                throw new KeyNotFoundException();
+            }
+            Course course = new Course(reader.GetString(1),reader.GetInt32(0));
+            return course;
+        }
     }
 }

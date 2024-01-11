@@ -7,6 +7,8 @@ using Contracts;
 using Contracts.Repositories;
 using Contracts.Models;
 using Npgsql;
+using NpgsqlTypes;
+using UniSmart.Contracts.Models.Exceptions;
 
 namespace Persistance.Repositories
 {
@@ -95,6 +97,10 @@ namespace Persistance.Repositories
                 Student student = new Student(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0)); //TODO Mapeo para no tener que cambiar los numeros cuando agrego una tabla
                 students.Add(student);
             }
+            if (students.Count== 0)
+            {
+                throw new EmptyListException(); //TODO Preguntar Nico
+            }
             return students;
         }
 
@@ -182,5 +188,17 @@ namespace Persistance.Repositories
             }
             return false;
         }
+
+        public async Task<Student> GetStudentAsync(int idStudent)
+        {
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
+                                                                       $"FROM universidadnikolay.alumnos" +
+                                                                       $"WHERE alumno.id={idStudent}");
+            using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            Student student = new Student(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
+            return student;
+        }
     }
+
 }
+

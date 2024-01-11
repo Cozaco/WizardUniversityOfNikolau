@@ -10,10 +10,23 @@ namespace UniSmart.API.Controllers
     public class StudentsController2 : ControllerBase
     {
         [HttpGet]
-        public async Task<StudentDTO> GetStudentAsync([FromBody] StudentDTO dto)
+        public async Task<StudentDTO> GetStudentAsync([FromBody] StudentDTO dto)//TODO no es mejor pasar solo el id?
         {
 
         }
+
+        [HttpGet("{idStudent}/professors")]
+        public async Task<List<ProfessorDTO>> GetProfessors(int idStudent)
+        {
+
+        }
+
+        [HttpGet("{idStudent}/courses")]
+        public async Task<List<CourseDTO>> GetCourses(int idStudent)
+        {
+
+        }
+
         [HttpPost]
         public async Task<StudentDTO> CreateAsync([FromBody] StudentDTO dto)
         {

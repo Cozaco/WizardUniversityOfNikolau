@@ -14,15 +14,23 @@ namespace UniSmart.API.Controllers
     public class ProfessorsControler2 : ControllerBase
     {
         [HttpGet("{idProfessor}")]
-        public async Task<ProfessorDTO> GetProfessorAsync(int idProfessor)//TODO Es para devolver un profesor?
+        public async Task<ProfessorDTO> GetByIdAsync(int idProfessor)
         {
-
+            Professor professor =await ServiceSingleton.GetInstance().professorService.GetByIdAsync(idProfessor);  
+            ProfessorDTO output= new ProfessorDTO(professor.Name,professor.Age,professor.Id.Value);
+            return output;
         }
         
         [HttpGet("{idProfessor}/students")]
         public async Task<List<StudentDTO>> GetStudents(int idProfessor)
         {
-
+            List<Student> students=await ServiceSingleton.GetInstance().professorService.GetStudentsAsync(idProfessor);
+            List<StudentDTO> output=new List<StudentDTO>();
+            foreach (Student student in students)
+            {
+                output.Add(new StudentDTO(student.Name,student.Age,student.Id.Value));
+            }
+            return output;
         }
 
         [HttpGet("{idProfessor}/courses")]
@@ -32,13 +40,13 @@ namespace UniSmart.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ProfessorDTO> CreateAsync([FromBody] ProfessorCreateDTO dto)
+        public async Task<ProfessorDTO> CreateAsync([FromBody] ProfessorCreateDTO dto)//TODO FRAN
         {
 
         }
 
         [HttpDelete("{id}")]   
-        public async Task<bool> DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             await ServiceSingleton.GetInstance().professorService.DeleteAsync(id);
         }

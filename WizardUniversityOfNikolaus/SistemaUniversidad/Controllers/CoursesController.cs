@@ -48,31 +48,31 @@ namespace UniSmart.API.ControllersSS
             return output;
         }
 
-        [HttpPost("{idCourse}/students/")]//TODO va con o sin la barrita al final?
-        public async Task<StudentDTO> SubscribeStudentAsync(int idCourse, [FromBody]StudentDTO dto)
+        [HttpPost("{idCourse}/students")]//TODO va con o sin la barrita al final?
+        public async Task SubscribeStudentAsync(int idCourse, [FromBody]StudentDTO dto)
         {
-
+            await ServiceSingleton.GetInstance().courseService.SubscribeStudentAsync(idCourse, dto.Id);
         }
 
-        [HttpPost("{idCourse}/professors/")]
+        [HttpPost("{idCourse}/professors")]//TODO FRAN
         public async Task<StudentDTO> SubscribeProfessorAsync(int idCourse, [FromBody]ProfessorDTO dto)
         {
 
         }
 
         [HttpDelete("{id}")]
-        public async Task<bool> DeleteAsync(int id) 
+        public async Task DeleteAsync(int id) 
         {
-
+            await ServiceSingleton.GetInstance().courseService.DeleteAsync(id);
         }
 
         [HttpDelete("{idCourse}/students/{idStudent}")] 
-        public async Task<bool> UnsubscribeStudent(int idCourse, int idStudent)
+        public async Task UnsubscribeStudent(int idCourse, int idStudent)
         {
-
+            await ServiceSingleton.GetInstance().courseService.UnsubscribeStudentAsync(idCourse, idStudent);
         }
 
-        [HttpDelete("{idCourse}/professors/{idProfessor}")]
+        [HttpDelete("{idCourse}/professors/{idProfessor}")]//TODO FRAN
         public async Task<bool> UnsubscribeProfessor(int idCourse, int idProfesor)
         {
 
@@ -80,9 +80,11 @@ namespace UniSmart.API.ControllersSS
 
         [HttpPut("{id}")]
 
-        public async Task<CourseDTO> UpdateAsync(int id)//TODO o le paso un CourseUpdateDto que tiene solo el id? 
+        public async Task<CourseDTO> UpdateAsync(CourseCreateDTO dto,int id)
         {
-
+            Course course = await ServiceSingleton.GetInstance().courseService.UpdateAsync(dto.Name,dto.Comission,id);
+            CourseDTO output= new CourseDTO(dto.Name,dto.Comission,id);
+            return output;
         }
 
     }

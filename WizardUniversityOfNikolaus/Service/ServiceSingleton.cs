@@ -11,7 +11,7 @@ using Service;
 
 namespace UniSmart.Service
 {
-    public class ServiceSingleton //TODO Hacer singleton como en Database
+    public class ServiceSingleton 
     {
         private static ServiceSingleton? serviceInstance;
         public IStudentService studentService;

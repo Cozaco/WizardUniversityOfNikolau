@@ -81,7 +81,7 @@ namespace Persistance.Repositories
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
             {
-                throw new Exception("Error al actualizar la materia");//TODO que hago si la query falla
+                throw new Exception("Error al actualizar la materia");
             }
             if (resultadoComando > 1)
             {
@@ -129,14 +129,14 @@ namespace Persistance.Repositories
         public async Task<Course> GetByIdAsync(int idCourse)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
-                                                                       $"FROM universidadnikolay.materias" +
-                                                                       $"WHERE materias.id={idCourse}");
+                                                                        $"FROM universidadnikolay.materias " +
+                                                                        $"WHERE materias.id = {idCourse}");
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
             if (reader.Read() == false)
             {
                 throw new KeyNotFoundException();
             }
-            Course course = new Course(reader.GetString(1),reader.GetInt32(0));
+            Course course = new Course(reader.GetString(1),reader.GetInt32(2), reader.GetInt32(0));
             return course;
         }
     }

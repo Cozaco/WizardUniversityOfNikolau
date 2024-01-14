@@ -36,13 +36,21 @@ namespace UniSmart.API.Controllers
         [HttpGet("{idProfessor}/courses")]
         public async Task<List<CourseDTO>> GetCourses(int idProfessor)
         {
-
+            List<Course> courses = await ServiceSingleton.GetInstance().professorService.GetCoursesAsync(idProfessor);
+            List<CourseDTO> output = new List<CourseDTO>();
+            foreach (Course course in courses)
+            {
+                output.Add(new CourseDTO(course.Name, course.Comission,course.Id.Value));
+            }
+            return output;
         }
 
         [HttpPost]
-        public async Task<ProfessorDTO> CreateAsync([FromBody] ProfessorCreateDTO dto)//TODO FRAN
+        public async Task<ProfessorDTO> CreateAsync([FromBody] ProfessorCreateDTO dto)
         {
-
+            Professor professor = await ServiceSingleton.GetInstance().professorService.CreateAsync(dto.Name, dto.Age);
+            ProfessorDTO output = new ProfessorDTO(professor.Name, professor.Age, professor.Id.Value);
+            return output;
         }
 
         [HttpDelete("{id}")]   
@@ -55,7 +63,8 @@ namespace UniSmart.API.Controllers
         public async Task<ProfessorDTO> UpdateAsync([FromBody] ProfessorCreateDTO dto,int id) 
         {
             Professor professor = await ServiceSingleton.GetInstance().professorService.UpdateAsync(dto.Name, dto.Age, id);
-            return new ProfessorDTO(); //TODO terminar esto
+            ProfessorDTO output = new ProfessorDTO(professor.Name, professor.Age, professor.Id.Value);
+            return output; 
         }
     }
 }

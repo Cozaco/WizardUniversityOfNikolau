@@ -19,7 +19,7 @@ namespace UniSmart.Contracts.Services
         public Task SubscribeProfessorAsync(int idCourse, int idProfessor);
         public Task UnsubscribeStudentAsync(int idCourse, int idStudent);
         public Task UnsubscribeProfessorAsync(int idCourse, int idProfessor);
-        public void InputCheck(string name, int comission);//TODO DATA ANOTATIONS
+        public void InputCheck(string name, int comission);//TODO DATA ANOTATIONS (Fran y Lolo)
 
     }
 }

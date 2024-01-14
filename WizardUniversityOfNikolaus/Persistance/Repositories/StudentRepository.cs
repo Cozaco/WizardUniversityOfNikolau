@@ -99,7 +99,7 @@ namespace Persistance.Repositories
             }
             if (students.Count== 0)
             {
-                throw new EmptyListException(); //TODO Preguntar Nico
+                throw new EmptyListException(); //TODO Preguntar Nico. 
             }
             return students;
         }

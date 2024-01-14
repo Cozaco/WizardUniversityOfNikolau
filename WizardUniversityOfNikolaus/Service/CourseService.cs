@@ -12,7 +12,7 @@ namespace Service
 {
     public class CourseService : ICourseService 
     {
-        public async Task<Course> CreateAsync(string name,int comission)//TODO Check
+        public async Task<Course> CreateAsync(string name,int comission)
         {
             InputCheck(name, comission);
             Course course = new Course(name, comission);
@@ -24,7 +24,7 @@ namespace Service
             await DataBase.GetInstance().courseRepository.DeleteAsync(id);
         }
 
-        public async Task<Course> UpdateAsync(string newName,int newComission,int idCourse)//TODO check
+        public async Task<Course> UpdateAsync(string newName,int newComission,int idCourse)
         {
             InputCheck(newName, newComission);
             Course course = new Course(newName, newComission,idCourse);
@@ -52,7 +52,7 @@ namespace Service
         }
         //Inscribir alumno en la materia. Primero se cuenta cuantas materias cursa, se chequea con el máximo de materias disponibles y de pasar,
         //se inscribe al alumno en la materia.
-        public async Task SubscribeStudentAsync(int idStudent, int idCourse)//TODO mirar lo del try
+        public async Task SubscribeStudentAsync(int idStudent, int idCourse)
         {
             int? materiasCursadas = (int)await DataBase.GetInstance().studentRepository.CountCoursesAsync(idStudent);
 

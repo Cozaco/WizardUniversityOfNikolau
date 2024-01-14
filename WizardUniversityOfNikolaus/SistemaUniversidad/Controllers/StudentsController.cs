@@ -1,70 +1,69 @@
+﻿using Contracts.Models;
 using Microsoft.AspNetCore.Mvc;
-using Contracts.Models;
-using Service; // es todo service lo que hay q importar? O podemos solo llamar a student service? por que a cualquier de las 2 posibilidades
-using System.Net.Cache;
-using UniSmart.API.InterfaceControllers;
-using UniSmart.Service;
 using UniSmart.API.DTOs.Responses;
+using UniSmart.API.DTOs.Requests;
+using UniSmart.Service;
 
-namespace SistemaUniversidad.Controllers
+namespace UniSmart.API.Controllers
 {
     [ApiController]
     [Route("students")]
-    public class StudentsController : ControllerBase/*,IStudentsController*/
+    public class StudentsController : ControllerBase
     {
-        //TODO el controller necesita constructor?, Porque esto no funciona
-        //private readonly ServiceSingleton _service;
+        [HttpGet("{id}")]
+        public async Task<StudentDTO> GetByIdAsync(int id)
+        {
+            Student student= await ServiceSingleton.GetInstance().studentService.GetByIdAsync(id);
+            StudentDTO output = new StudentDTO(student.Name,student.Age,student.Id.Value);
+            return output;
+        }
 
-        //public StudentsController(StudentService studentService)
-        //{
-        //    _service = ServiceSingleton.GetInstance();
-        //}
 
+        [HttpGet("{idStudent}/professors")]
+        public async Task<List<ProfessorDTO>> GetProfessors(int idStudent)
+        {
+            List<Professor> professors=await ServiceSingleton.GetInstance().studentService.GetProfessorsAsync(idStudent);
+            List<ProfessorDTO> output= new List<ProfessorDTO>();
+            foreach(Professor professor in professors)
+            {
+                output.Add(new ProfessorDTO(professor.Name,professor.Age,professor.Id.Value));  
+            }
+            return output;
+        }
+
+        [HttpGet("{idStudent}/courses")]
+        public async Task<List<CourseDTO>> GetCourses(int idStudent)
+        {
+            List<Course> courses= await ServiceSingleton.GetInstance().studentService.GetCoursesAsync(idStudent);
+            List<CourseDTO> output= new List<CourseDTO>();
+            foreach(Course course in courses)
+            {
+                output.Add(new CourseDTO(course.Name,course.Comission,course.Id.Value));
+            }
+            return output;
+        }
 
         [HttpPost]
-        public async Task<StudentDTO> CreateAsync([FromBody] StudentDTO dto)
+        public async Task<StudentDTO> CreateAsync([FromBody] StudentCreateDTO dto)
         {
             Student student = await ServiceSingleton.GetInstance().studentService.CreateAsync(dto.Name, dto.Age);
-            StudentDTO studentdto = new StudentDTO(student.Name, student.Age, student.Id);
+            StudentDTO output= new StudentDTO(student.Name,student.Age,student.Id.Value);
+            return output;
         }
 
-        [HttpDelete("{idStudent}")]     
-        public async Task<bool> DeleteAsync(int idStudent)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteAsync(int id)
         {
-            return await ServiceSingleton.GetInstance().studentService.DeleteAsync(idStudent);
-        }
-
-        [HttpGet("courses/{idCourse}")]
-        public async Task<List<Student>> GetCourseStudentsAsync(int idCourse) //TODO cambiar todos los students por studentsDTO
-        {
-            var list = await ServiceSingleton.GetInstance().studentService.GetCourseStudentsAsync(idCourse);
-            return list;
-        }
-
-        [HttpGet("professors/{idProfessor}")]
-        public async Task<List<Student>> GetProfessorStudentsAsync(int idProfessor)
-        {
-            return await ServiceSingleton.GetInstance().studentService.GetProfessorStudentsAsync(idProfessor);
-        }
-
-        [HttpDelete("{idStudent}/courses/{idCourse}")]
-        public async Task<bool> LeaveCourseAsync(int idStudent, int idCourse)
-        {
-            return await ServiceSingleton.GetInstance().studentService.LeaveCourseAsync(idStudent, idCourse); 
-        }
-
-        [HttpPost("{idStudent}/{idCourse}")]
-        public async Task<bool> TakeCourseAsync(int idStudent, int idCourse)
-        {
-            return await ServiceSingleton.GetInstance().studentService.TakeCourseAsync(idStudent, idCourse);
+            await ServiceSingleton.GetInstance().studentService.DeleteAsync(id);
+            return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<Student> UpdateAsync([FromBody] StudentDTO dto) //TODO puse el DTO, como veo si el ID esta bien
+        public async Task<StudentDTO> UpdateAsync([FromBody] StudentCreateDTO dto, int id)
         {
-            return await ServiceSingleton.GetInstance().studentService.UpdateAsync((int)dto.Id, dto.Name, dto.Age);
+            Student student = await ServiceSingleton.GetInstance().studentService.UpdateAsync( dto.Name, dto.Age, id);
+            StudentDTO output = new StudentDTO(student.Name, student.Age, student.Id.Value);
+            return output;
         }
-
-        // TODO hacer GetId en repository y service y agregarlo aca. Agregar las demas funciones
     }
 }

@@ -81,7 +81,7 @@ namespace Persistance.Repositories
 
         public async Task<List<Professor>> GetStudentProfessorsAsync(int idStudent)
         {
-            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT profesores.id,profesores.nombre " +
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
                                                                         $"FROM universidadnikolay.profesores " +
                                                                         $"JOIN universidadnikolay.profesores_dictan " +
                                                                         $"ON profesores.id=profesores_dictan.profesor_id " +
@@ -93,7 +93,7 @@ namespace Persistance.Repositories
             List<Professor> professors = new List<Professor>();
             while (reader.Read())
             {
-                Professor professor = new Professor(reader.GetString(1), reader.GetInt32(0));
+                Professor professor = new Professor(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
                 professors.Add(professor);
             }
             return professors;
@@ -119,15 +119,15 @@ namespace Persistance.Repositories
 
         public async Task<bool> TakeCourseAsync(int idProfessor, int idCourse)
         {
-            using NpgsqlCommand commandChequeo = dataSource.CreateCommand($"SELECT COUNT (id_alumno) " +
-                                                                          $"FROM universidadnikolay.profesores_dictan " +
-                                                                          $"WHERE id_profesor={idProfessor}");
-            int? resultadoChequeo = (int?)await commandChequeo.ExecuteScalarAsync();
-            if (resultadoChequeo >= 1)
-            {
-                Console.WriteLine("El Profesor no puede dictar más materias");
-                return false;
-            }
+            //using NpgsqlCommand commandChequeo = dataSource.CreateCommand($"SELECT COUNT (alumno_id) " +
+            //                                                              $"FROM universidadnikolay.profesores_dictan " +
+            //                                                              $"WHERE profesor_id={idProfessor}");
+            //int? resultadoChequeo = (int?)await commandChequeo.ExecuteScalarAsync();
+            //if (resultadoChequeo >= 1)
+            //{
+            //    Console.WriteLine("El Profesor no puede dictar más materias");
+            //    return false;
+            //}
 
             using NpgsqlCommand command = dataSource.CreateCommand($"INSERT INTO universidadnikolay.profesores_dictan " +
                                                                    $"VALUES ({idProfessor},{idCourse})");
@@ -192,9 +192,13 @@ namespace Persistance.Repositories
         public async Task<Professor> GetByIdAsync(int idProfessor)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
-                                                                       $"FROM universidadnikolay.profesores" +
-                                                                       $"WHERE profesores.id={idProfessor}");
+                                                                        $"FROM universidadnikolay.profesores " +
+                                                                        $"WHERE profesores.id={idProfessor}");
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            if (reader.Read() == false)
+            {
+                throw new KeyNotFoundException();
+            }
             Professor professor = new Professor(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
             return professor;
         }

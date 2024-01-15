@@ -92,7 +92,7 @@ namespace Persistance.Repositories
 
         public async Task<List<Course>> GetStudentCoursesAsync(int idStudent)
         {
-            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT materias.id,materias.nombre " +
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
                                                                         $"FROM universidadnikolay.materias " +
                                                                         $"JOIN universidadnikolay.alumnos_cursan " +
                                                                         $"ON materias.id=alumnos_cursan.materia_id " +
@@ -102,7 +102,7 @@ namespace Persistance.Repositories
             List<Course> studentCourses = new List<Course>();
             while (reader.Read())
             {
-                Course materia = new Course(reader.GetString(1), reader.GetInt32(0));
+                Course materia = new Course(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
                 studentCourses.Add(materia);
             }
             return studentCourses;
@@ -110,7 +110,7 @@ namespace Persistance.Repositories
 
         public async Task<List<Course>> GetProfessorCoursesAsync(int idProfessor)
         {
-            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT materias.id,materias.nombre " +
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
                                                                         $"FROM universidadnikolay.materias " +
                                                                         $"JOIN universidadnikolay.profesores_dictan " +
                                                                         $"ON materias.id=profesores_dictan.materia_id " +
@@ -120,7 +120,7 @@ namespace Persistance.Repositories
             List<Course> professorCourses = new List<Course>();
             while (reader.Read())
             {
-                Course materia = new Course(reader.GetString(1), reader.GetInt32(0));
+                Course materia = new Course(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
                 professorCourses.Add(materia);
             }
             return professorCourses;

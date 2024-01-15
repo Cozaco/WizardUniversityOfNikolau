@@ -34,7 +34,7 @@ namespace UniSmart.API.ControllersSS
         }
 
         [HttpGet("{idCourse}/professors")]
-        public async Task<List<ProfessorDTO>> GetProfessors(int idCourse)
+        public async Task<ActionResult<List<ProfessorDTO>>> GetProfessors(int idCourse) //TODO porque no entraba a la funcion. Porque no anda?
         {
             List<Professor> professors = await ServiceSingleton.GetInstance().courseService.GetProfessorsAsync(idCourse);
             List<ProfessorDTO> output = new List<ProfessorDTO>();  
@@ -42,7 +42,7 @@ namespace UniSmart.API.ControllersSS
             {
                 output.Add(new ProfessorDTO(professor.Name,professor.Age,professor.Id.Value));
             }
-            return output;
+            return Ok(output);
         }
 
 
@@ -57,13 +57,13 @@ namespace UniSmart.API.ControllersSS
         [HttpPost("{idCourse}/students")]
         public async Task SubscribeStudentAsync(int idCourse, [FromBody]StudentDTO dto)
         {
-            await ServiceSingleton.GetInstance().courseService.SubscribeStudentAsync(idCourse, dto.Id);
+            await ServiceSingleton.GetInstance().courseService.SubscribeStudentAsync(dto.Id, idCourse);
         }
 
         [HttpPost("{idCourse}/professors")]
         public async Task SubscribeProfessorAsync(int idCourse, [FromBody]ProfessorDTO dto)
         {
-            await ServiceSingleton.GetInstance().courseService.SubscribeProfessorAsync (idCourse, dto.Id);
+            await ServiceSingleton.GetInstance().courseService.SubscribeProfessorAsync (dto.Id, idCourse);
         }
 
         [HttpDelete("{id}")]
@@ -72,16 +72,16 @@ namespace UniSmart.API.ControllersSS
             await ServiceSingleton.GetInstance().courseService.DeleteAsync(id);
         }
 
-        [HttpDelete("{idCourse}/students/{idStudent}")] 
-        public async Task UnsubscribeStudent(int idCourse, int idStudent)
+        [HttpDelete("{idCourse}/students/{idStudent}")]
+        public async Task UnsubscribeStudent(int idStudent, int idCourse)
         {
-            await ServiceSingleton.GetInstance().courseService.UnsubscribeStudentAsync(idCourse, idStudent);
+            await ServiceSingleton.GetInstance().courseService.UnsubscribeStudentAsync(idStudent, idCourse);
         }
 
         [HttpDelete("{idCourse}/professors/{idProfessor}")] // TODO Porque en DELETE pasamos Id y en POST pasamos el dto entero. Esta bien esto que hicimos? O cual de las 2 maneras esta mejor?
-        public async Task UnsubscribeProfessor(int idCourse, int idProfesor)
+        public async Task UnsubscribeProfessor(int idCourse, int idProfessor)
         {
-            await ServiceSingleton.GetInstance().courseService.UnsubscribeProfessorAsync(idCourse, idProfesor);
+            await ServiceSingleton.GetInstance().courseService.UnsubscribeProfessorAsync(idProfessor, idCourse);
         }
 
         [HttpPut("{id}")]

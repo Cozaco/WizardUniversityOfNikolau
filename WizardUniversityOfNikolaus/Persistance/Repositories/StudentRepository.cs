@@ -106,7 +106,7 @@ namespace Persistance.Repositories
 
         public async Task<List<Student>> GetProfessorStudentsAsync(int idProfessor)
         {
-            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT alumnos.id,alumnos.nombre " +
+            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
                                                                         $"FROM universidadnikolay.alumnos " +
                                                                         $"JOIN universidadnikolay.alumnos_cursan " +
                                                                         $"ON alumnos.id=alumnos_cursan.alumno_id " +
@@ -118,7 +118,7 @@ namespace Persistance.Repositories
             List<Student> students = new List<Student>();
             while (reader.Read())
             {
-                Student student = new Student(reader.GetString(1), reader.GetInt32(0));
+                Student student = new Student(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
                 students.Add(student);
             }
             return students;
@@ -126,9 +126,9 @@ namespace Persistance.Repositories
 
         public async Task<long> CountCoursesAsync(int idStudent)
         {
-            await using NpgsqlCommand chequeoQuery = dataSource.CreateCommand($"SELECT COUNT(id_alumno) " +
+            await using NpgsqlCommand chequeoQuery = dataSource.CreateCommand($"SELECT COUNT(alumno_id) " +
                                                                               $"FROM universidadnikolay.alumnos_cursan " +
-                                                                              $"WHERE id_alumno={idStudent}");
+                                                                              $"WHERE alumno_id={idStudent}");
             long? resultadoQuery =(long?)chequeoQuery.ExecuteScalar();
             if ( resultadoQuery == null )
             {
@@ -158,7 +158,7 @@ namespace Persistance.Repositories
         {
             await using NpgsqlCommand command = dataSource.CreateCommand($"DELETE FROM universidadnikolay.alumnos_cursan " +
                                                                          $"WHERE alumnos_cursan.alumno_id = {idStudent} " +
-                                                                         $"AND alumno_cursan.materia_id = {idCourse}");
+                                                                         $"AND alumnos_cursan.materia_id = {idCourse}");
 
             int resultadoComando = await command.ExecuteNonQueryAsync(); // hace la query y no devuelve nada
             if (resultadoComando == -1)
@@ -192,9 +192,13 @@ namespace Persistance.Repositories
         public async Task<Student> GetByIdAsync(int idStudent)
         {
             await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
-                                                                       $"FROM universidadnikolay.alumnos" +
-                                                                       $"WHERE alumno.id={idStudent}");
+                                                                       $"FROM universidadnikolay.alumnos " +
+                                                                       $"WHERE alumnos.id={idStudent}");
             using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            if (reader.Read() == false)
+            {
+                throw new KeyNotFoundException();
+            }
             Student student = new Student(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
             return student;
         }

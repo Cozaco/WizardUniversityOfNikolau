@@ -11,7 +11,7 @@ namespace UniSmart.API.Controllers
 {
     [ApiController]
     [Route("professors")]
-    public class ProfessorsControler2 : ControllerBase
+    public class ProfessorsController : ControllerBase
     {
         [HttpGet("{idProfessor}")]
         public async Task<ProfessorDTO> GetByIdAsync(int idProfessor)

@@ -43,7 +43,7 @@ namespace Service
 
         public async Task<List<Professor>> GetProfessorsAsync(int idCourse)
         {
-            return await DataBase.GetInstance().professorRepository.GetStudentProfessorsAsync(idCourse);
+            return await DataBase.GetInstance().professorRepository.GetCourseProfessorsAsync(idCourse);
         }
 
         public async Task SubscribeProfessorAsync(int idProfessor, int idCourse)

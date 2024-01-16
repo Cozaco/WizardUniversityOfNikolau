@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UniSmart.Contracts.Repositories;
 using UniSmart.Contracts.Services;
 
 namespace Persistance.Repositories
@@ -14,9 +15,9 @@ namespace Persistance.Repositories
     {
         public NpgsqlDataSource dataSource;
 
-        public CourseRepository(NpgsqlDataSource dataSource)
+        public CourseRepository(IDataSource dataSource)
         {
-            this.dataSource = dataSource;
+            this.dataSource = dataSource.GetConnection();
         }
         public async Task<Course> CreateAsync(Course course)
         {

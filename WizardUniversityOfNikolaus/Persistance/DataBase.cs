@@ -7,10 +7,11 @@ using Contracts.Models;
 using Contracts.Repositories;
 using Npgsql;
 using Persistance.Repositories;
+using UniSmart.Contracts.Repositories;
 
 namespace Persistance
 {
-    public class DataBase : IDisposable
+    public class DataBase : IDisposable,IDataSource
     {
         private static DataBase? dataBaseInstance;
         private static readonly NpgsqlDataSource dataSource = NpgsqlDataSource.Create("Host=127.0.0.1;Username=postgres;Password=0802;Database=postgres");
@@ -43,6 +44,11 @@ namespace Persistance
                 return;
             }
             dataSource.Dispose();
+        }
+
+        public NpgsqlDataSource GetConnection()
+        {
+            return dataSource;
         }
     }
 }

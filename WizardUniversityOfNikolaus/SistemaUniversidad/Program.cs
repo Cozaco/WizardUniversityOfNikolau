@@ -1,9 +1,11 @@
 using Contracts.Repositories;
 using Npgsql;
 using Npgsql.Internal;
+using Persistance;
 using Persistance.Repositories;
 using Service;
 using UniSmart.API.Middleware;
+using UniSmart.Contracts.Repositories;
 using UniSmart.Contracts.Services;
 
 namespace SistemaUniversidad
@@ -29,7 +31,7 @@ namespace SistemaUniversidad
             builder.Services.AddTransient<ICourseRepository , CourseRepository>();
             builder.Services.AddTransient<IStudentRepository, StudentRepository>();
             builder.Services.AddTransient<IProfessorRepository, ProfessorRepository>();
-            //builder.Services.AddTransient<INpgsqlDatabaseInfoFactory, NpgsqlDataSource>();
+            builder.Services.AddTransient<IDataSource, DataBase>();
 
             app.UseMiddleware<HandleExceptionMiddleware>();
             // Configure the HTTP request pipeline.

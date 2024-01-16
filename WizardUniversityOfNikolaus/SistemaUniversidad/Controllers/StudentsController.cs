@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using UniSmart.API.DTOs.Responses;
 using UniSmart.API.DTOs.Requests;
 using UniSmart.Service;
+using UniSmart.Contracts.Services;
 
 namespace UniSmart.API.Controllers
 {
@@ -10,10 +11,17 @@ namespace UniSmart.API.Controllers
     [Route("students")]
     public class StudentsController : ControllerBase
     {
+        public IStudentService studentService;
+
+        public StudentsController(IStudentService studentService)
+        {
+            this.studentService = studentService;
+        }
+
         [HttpGet("{id}")]
         public async Task<StudentDTO> GetByIdAsync(int id)
         {
-            Student student= await ServiceSingleton.GetInstance().studentService.GetByIdAsync(id);
+            Student student= await this.studentService.GetByIdAsync(id);
             StudentDTO output = new StudentDTO(student.Name,student.Age,student.Id.Value);
             return output;
         }
@@ -22,7 +30,7 @@ namespace UniSmart.API.Controllers
         [HttpGet("{idStudent}/professors")]
         public async Task<List<ProfessorDTO>> GetProfessors(int idStudent)
         {
-            List<Professor> professors=await ServiceSingleton.GetInstance().studentService.GetProfessorsAsync(idStudent);
+            List<Professor> professors=await this.studentService.GetProfessorsAsync(idStudent);
             List<ProfessorDTO> output= new List<ProfessorDTO>();
             foreach(Professor professor in professors)
             {
@@ -34,7 +42,7 @@ namespace UniSmart.API.Controllers
         [HttpGet("{idStudent}/courses")]
         public async Task<List<CourseDTO>> GetCourses(int idStudent)
         {
-            List<Course> courses= await ServiceSingleton.GetInstance().studentService.GetCoursesAsync(idStudent);
+            List<Course> courses= await this.studentService.GetCoursesAsync(idStudent);
             List<CourseDTO> output= new List<CourseDTO>();
             foreach(Course course in courses)
             {
@@ -46,7 +54,7 @@ namespace UniSmart.API.Controllers
         [HttpPost]
         public async Task<StudentDTO> CreateAsync([FromBody] StudentCreateDTO dto)
         {
-            Student student = await ServiceSingleton.GetInstance().studentService.CreateAsync(dto.Name, dto.Age);
+            Student student = await this.studentService.CreateAsync(dto.Name, dto.Age);
             StudentDTO output= new StudentDTO(student.Name,student.Age,student.Id.Value);
             return output;
         }
@@ -54,14 +62,14 @@ namespace UniSmart.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            await ServiceSingleton.GetInstance().studentService.DeleteAsync(id);
+            await this.studentService.DeleteAsync(id);
             return Ok();
         }
 
         [HttpPut("{id}")]
         public async Task<StudentDTO> UpdateAsync([FromBody] StudentCreateDTO dto, int id)
         {
-            Student student = await ServiceSingleton.GetInstance().studentService.UpdateAsync( dto.Name, dto.Age, id);
+            Student student = await this.studentService.UpdateAsync( dto.Name, dto.Age, id);
             StudentDTO output = new StudentDTO(student.Name, student.Age, student.Id.Value);
             return output;
         }

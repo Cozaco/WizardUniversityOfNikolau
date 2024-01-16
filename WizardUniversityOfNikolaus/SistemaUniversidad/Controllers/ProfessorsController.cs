@@ -6,6 +6,7 @@ using UniSmart.API.InterfaceControllers;
 using UniSmart.Service;
 using UniSmart.API.DTOs.Responses;
 using UniSmart.API.DTOs.Requests;
+using UniSmart.Contracts.Services;
 
 namespace UniSmart.API.Controllers
 {
@@ -13,10 +14,17 @@ namespace UniSmart.API.Controllers
     [Route("professors")]
     public class ProfessorsController : ControllerBase
     {
+        public IProfessorService professorService;
+
+        public ProfessorsController(IProfessorService professorService)
+        {
+            this.professorService = professorService;
+        }
+
         [HttpGet("{idProfessor}")]
         public async Task<ProfessorDTO> GetByIdAsync(int idProfessor)
         {
-            Professor professor =await ServiceSingleton.GetInstance().professorService.GetByIdAsync(idProfessor);  
+            Professor professor =await this.professorService.GetByIdAsync(idProfessor);  
             ProfessorDTO output= new ProfessorDTO(professor.Name,professor.Age,professor.Id.Value);
             return output;
         }
@@ -24,7 +32,7 @@ namespace UniSmart.API.Controllers
         [HttpGet("{idProfessor}/students")]
         public async Task<List<StudentDTO>> GetStudents(int idProfessor)
         {
-            List<Student> students=await ServiceSingleton.GetInstance().professorService.GetStudentsAsync(idProfessor);
+            List<Student> students=await this.professorService.GetStudentsAsync(idProfessor);
             List<StudentDTO> output=new List<StudentDTO>();
             foreach (Student student in students)
             {
@@ -36,7 +44,7 @@ namespace UniSmart.API.Controllers
         [HttpGet("{idProfessor}/courses")]
         public async Task<List<CourseDTO>> GetCourses(int idProfessor)
         {
-            List<Course> courses = await ServiceSingleton.GetInstance().professorService.GetCoursesAsync(idProfessor);
+            List<Course> courses = await this.professorService.GetCoursesAsync(idProfessor);
             List<CourseDTO> output = new List<CourseDTO>();
             foreach (Course course in courses)
             {
@@ -48,7 +56,7 @@ namespace UniSmart.API.Controllers
         [HttpPost]
         public async Task<ProfessorDTO> CreateAsync([FromBody] ProfessorCreateDTO dto)
         {
-            Professor professor = await ServiceSingleton.GetInstance().professorService.CreateAsync(dto.Name, dto.Age);
+            Professor professor = await this.professorService.CreateAsync(dto.Name, dto.Age);
             ProfessorDTO output = new ProfessorDTO(professor.Name, professor.Age, professor.Id.Value);
             return output;
         }
@@ -56,13 +64,13 @@ namespace UniSmart.API.Controllers
         [HttpDelete("{id}")]   
         public async Task DeleteAsync(int id)
         {
-            await ServiceSingleton.GetInstance().professorService.DeleteAsync(id);
+            await this.professorService.DeleteAsync(id);
         }
 
         [HttpPut("{id}")]
         public async Task<ProfessorDTO> UpdateAsync([FromBody] ProfessorCreateDTO dto,int id) 
         {
-            Professor professor = await ServiceSingleton.GetInstance().professorService.UpdateAsync(dto.Name, dto.Age, id);
+            Professor professor = await this.professorService.UpdateAsync(dto.Name, dto.Age, id);
             ProfessorDTO output = new ProfessorDTO(professor.Name, professor.Age, professor.Id.Value);
             return output; 
         }

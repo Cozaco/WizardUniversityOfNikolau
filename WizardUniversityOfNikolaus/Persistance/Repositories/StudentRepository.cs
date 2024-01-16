@@ -97,10 +97,7 @@ namespace Persistance.Repositories
                 Student student = new Student(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0)); //TODO Mapeo para no tener que cambiar los numeros cuando agrego una tabla
                 students.Add(student);
             }
-            if (students.Count== 0)
-            {
-                throw new EmptyListException(); //TODO Preguntar Nico. 
-            }
+            
             return students;
         }
 

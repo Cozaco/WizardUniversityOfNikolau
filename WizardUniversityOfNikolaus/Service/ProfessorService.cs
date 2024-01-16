@@ -1,4 +1,5 @@
 ﻿using Contracts.Models;
+using Contracts.Repositories;
 using Persistance;
 using System;
 using System.Collections.Generic;
@@ -12,35 +13,46 @@ namespace Service
 {
     public class ProfessorService : IProfessorService
     {
+        public IProfessorRepository professorRepository;
+        public IStudentRepository studentRepository;
+        public ICourseRepository courseRepository;
+
+        public ProfessorService(IProfessorRepository professorRepository, IStudentRepository studentRepository, ICourseRepository courseRepository)
+        {
+            this.professorRepository = professorRepository;
+            this.studentRepository = studentRepository;
+            this.courseRepository = courseRepository;
+        }
+
         public async Task<Professor> CreateAsync(string name, int age)
         {
             InputCheck(name, age);
             Professor professor = new Professor(name, age);
-            return await DataBase.GetInstance().professorRepository.CreateAsync(professor);
+            return await this.professorRepository.CreateAsync(professor);
         }
 
         public async Task DeleteAsync(int id)
         {
-            await DataBase.GetInstance().professorRepository.DeleteAsync(id);
+            await this.professorRepository.DeleteAsync(id);
         }
 
         public async Task<Professor> UpdateAsync(string newName, int newAge, int idProfessor)
         {
             InputCheck(newName, newAge);
             Professor professor = new Professor(newName, newAge, idProfessor );
-            return await DataBase.GetInstance().professorRepository.UpdateAsync(professor); //Cambia las caracteristicas de professor?         
+            return await this.professorRepository.UpdateAsync(professor); //Cambia las caracteristicas de professor?         
         }
         public async Task<Professor> GetByIdAsync(int id)
         {
-            return await DataBase.GetInstance().professorRepository.GetByIdAsync(id);
+            return await this.professorRepository.GetByIdAsync(id);
         }
         public async Task<List<Student>> GetStudentsAsync(int idProfessor)
         {
-            return await DataBase.GetInstance().studentRepository.GetProfessorStudentsAsync(idProfessor);
+            return await this.studentRepository.GetProfessorStudentsAsync(idProfessor);
         }
         public async Task<List<Course>> GetCoursesAsync(int idProfessor)
         {
-            return await DataBase.GetInstance().courseRepository.GetProfessorCoursesAsync(idProfessor);
+            return await this.courseRepository.GetProfessorCoursesAsync(idProfessor);
         }
         public void InputCheck(string name, int age)
         {

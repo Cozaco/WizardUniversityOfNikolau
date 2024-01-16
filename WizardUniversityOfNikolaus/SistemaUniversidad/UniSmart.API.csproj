@@ -12,7 +12,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contracts\UniSmart.Contracts.csproj" />
+    <ProjectReference Include="..\Persistance\UniSmart.Persistance.csproj" />
     <ProjectReference Include="..\Service\UniSmart.Service.csproj" />
+    <ProjectReference Include="..\WizardUniversityOfNikolaus\UniSmart.app.csproj" />
   </ItemGroup>
 
 </Project>

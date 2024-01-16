@@ -8,9 +8,9 @@ using UniSmart.Contracts.Repositories;
 
 namespace Contracts.Repositories
 {
-    public interface ICourseRepository : IRepository<Course>
+    public interface ICourseRepository /*: IRepository<Course>*/
     {
-        //public Task CreateAsync(Course course); 
+        public Task<Course> CreateAsync(Course course); 
         public Task<bool> DeleteAsync(int idCourse);
         public Task<Course> UpdateAsync(Course course);
 

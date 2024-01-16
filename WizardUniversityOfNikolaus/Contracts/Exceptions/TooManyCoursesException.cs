@@ -8,5 +8,6 @@ namespace UniSmart.Contracts.Exceptions
 {
     public class TooManyCoursesException : ExpectedException
     {
+        
     }
 }

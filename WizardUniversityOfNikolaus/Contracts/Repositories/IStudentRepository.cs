@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Contracts.Repositories
 {
-    public interface IStudentRepository
+    public interface IStudentRepository //TODO Agregar un existbyid para chequear si la id que me psan está.Usar SELECT EXISTS (query)(execute scalar (bool)) 
     {
         public Task<Student> CreateAsync(Student student);
         

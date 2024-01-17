@@ -188,16 +188,44 @@ namespace Persistance.Repositories
 
         public async Task<Student> GetByIdAsync(int idStudent)
         {
-            await using NpgsqlCommand comand = dataSource.CreateCommand($"SELECT * " +
-                                                                       $"FROM universidadnikolay.alumnos " +
-                                                                       $"WHERE alumnos.id={idStudent}");
-            using NpgsqlDataReader reader = await comand.ExecuteReaderAsync();
+            await using NpgsqlCommand command = dataSource.CreateCommand($"SELECT * " +
+                                                                         $"FROM universidadnikolay.alumnos " +
+                                                                         $"WHERE alumnos.id={idStudent}");
+            using NpgsqlDataReader reader = await command.ExecuteReaderAsync();
             if (reader.Read() == false)
             {
                 throw new KeyNotFoundException();
             }
             Student student = new Student(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
             return student;
+        }
+
+        public async Task<bool> CheckPasswordAsync(string user, string passwordToCheck)
+        {
+            await using NpgsqlCommand command = dataSource.CreateCommand($"SELECT alumnos.mail " +
+                                                                         $"FROM universidadnikolay.alumnos " +
+                                                                         $"WHERE alumnos.mail={user} " +
+                                                                         $"RETURNING id");
+            int? id =(int?) await command.ExecuteScalarAsync();//TODO Preguntar como hago para diferenciar si me da null porque no se pudo hacer la query o porque no existía el mail?
+            if (id == null)
+            {
+                throw new NotFoundException();
+            }
+
+            await using NpgsqlCommand command2 = dataSource.CreateCommand($"SELECT password " +
+                                                                          $"FROM universidadnikolay.alumnos_password " +
+                                                                          $"WHERE alumno_id={id} " +
+                                                                          $"RETURNING password");
+            string? password = (string?)await command.ExecuteScalarAsync();
+            if(password == null )
+            {
+                throw new CantDoQueryException();
+            }
+            if(password == passwordToCheck)
+            {
+                return true;
+            }
+            return false;
         }
     }
 

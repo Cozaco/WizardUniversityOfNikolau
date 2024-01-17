@@ -16,5 +16,6 @@ namespace UniSmart.Contracts.Services
         public Task<List<Student>> GetStudentsAsync(int id);
         public Task<List<Course>> GetCoursesAsync(int id);
         public void InputCheck(string name, int age);
+        public Task<bool> CheckPasswordAsync(string user, string password);
     }
 }

@@ -34,6 +34,8 @@ namespace SistemaUniversidad
             builder.Services.AddTransient<IDataSource, DataBase>();
 
             app.UseMiddleware<HandleExceptionMiddleware>();
+            app.UseMiddleware<AutentifactionMiddleware>();
+            
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

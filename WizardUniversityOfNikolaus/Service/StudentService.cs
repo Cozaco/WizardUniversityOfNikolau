@@ -69,5 +69,10 @@ namespace Service
                 throw new Exception("The age number must be more than 18. If not, this child is a Genius! Also call 911. He knows too much!");
             }
         }
+
+        public async Task<bool> CheckPasswordAsync(string user, string password)
+        {
+            return await studentRepository.CheckPasswordAsync(user,password);
+        }
     }
 }

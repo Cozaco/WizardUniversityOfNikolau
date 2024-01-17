@@ -22,8 +22,11 @@ namespace Contracts.Repositories
         public Task<bool> TakeCourseAsync(int idProfessor, int idCourse);
 
         public Task<bool> LeaveCourseAsync(int idProfessor, int idCourse);
+
         public Task<bool> ValidateInfoAsync(int id, string name, int edad);
 
         public Task<Professor> GetByIdAsync(int idProfessor);
+
+        public Task<bool> CheckPasswordAsync(string user, string password);
     }
 }

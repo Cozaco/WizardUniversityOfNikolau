@@ -65,5 +65,10 @@ namespace Service
                 throw new Exception("The age number must be more than 18. If not, it is child labour! Call 911");
             }
         }
+
+        public Task<bool> CheckPasswordAsync(string user, string password)
+        {
+            return professorRepository.CheckPasswordAsync(user, password);
+        }
     }
 }

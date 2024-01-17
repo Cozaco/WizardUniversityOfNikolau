@@ -1,5 +1,5 @@
-﻿using Contracts.Models;
-using Persistance;
+﻿using UniSmart.Contracts.Models;
+using UniSmart.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using UniSmart.Contracts.Services;
 using UniSmart.Contracts.Exceptions;
-using Contracts.Repositories;
+using UniSmart.Contracts.Repositories;
 
-namespace Service
+namespace UniSmart.Service
 {
     public class CourseService : ICourseService
     {

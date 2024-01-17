@@ -1,11 +1,11 @@
-﻿using Contracts.Models;
+﻿using UniSmart.Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contracts.Repositories
+namespace UniSmart.Contracts.Repositories
 {
     public interface IStudentRepository //TODO Agregar un existbyid para chequear si la id que me psan está.Usar SELECT EXISTS (query)(execute scalar (bool)) 
     {

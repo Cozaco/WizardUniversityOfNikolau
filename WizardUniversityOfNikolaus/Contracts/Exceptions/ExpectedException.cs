@@ -8,7 +8,7 @@ namespace UniSmart.Contracts.Exceptions
 {
     public abstract class ExpectedException : Exception
     {
-        public int Code { get; set; }
-        public ExpectedException() { }
+        public abstract int Code { get;}
+        public ExpectedException(string message):base(message) { }
     }
 }

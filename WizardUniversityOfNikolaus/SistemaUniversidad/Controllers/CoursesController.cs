@@ -1,18 +1,13 @@
-﻿using Contracts.Models;
-using Microsoft.AspNetCore.Http;
+﻿using UniSmart.Contracts.Models;
 using Microsoft.AspNetCore.Mvc;
 using UniSmart.API.DTOs.Requests;
 using UniSmart.API.DTOs.Responses;
-using Service;
-using UniSmart.Service;
-using UniSmart.Contracts.Exceptions;
 using UniSmart.Contracts.Services;
-using Contracts.Repositories;
 
 namespace UniSmart.API.ControllersSS
 {
     [ApiController]
-    [Route("courses")]
+    [Route("/api/courses")]
     public class CoursesController : ControllerBase
     {
         ICourseService courseService;

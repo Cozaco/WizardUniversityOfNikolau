@@ -1,4 +1,4 @@
-﻿using Contracts.Models;
+﻿using UniSmart.Contracts.Models;
 
 namespace UniSmart.API.DTOs.Responses
 {

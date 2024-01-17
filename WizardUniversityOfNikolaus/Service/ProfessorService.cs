@@ -1,6 +1,6 @@
-﻿using Contracts.Models;
-using Contracts.Repositories;
-using Persistance;
+﻿using UniSmart.Contracts.Models;
+using UniSmart.Contracts.Repositories;
+using UniSmart.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using UniSmart.Contracts.Services;
 
-namespace Service
+namespace UniSmart.Service //TODO agregar s
 {
     public class ProfessorService : IProfessorService
     {

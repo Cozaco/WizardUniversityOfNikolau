@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Contracts;
-using Contracts.Repositories;
-using Contracts.Models;
+using UniSmart.Contracts;
+using UniSmart.Contracts.Repositories;
+using UniSmart.Contracts.Models;
 using Npgsql;
 using NpgsqlTypes;
 using UniSmart.Contracts.Exceptions;
 
-namespace Persistance.Repositories
+
+namespace UniSmart.Persistance.Repositories
 {
     public class StudentRepository : IStudentRepository
     {
         public NpgsqlDataSource dataSource;
        
 
-        public StudentRepository(NpgsqlDataSource dataSource)
+        public StudentRepository(IDataSource dataSource)
         {
-            this.dataSource = dataSource;
+            this.dataSource = dataSource.GetConnection();
         }
 
         public async Task<Student> CreateAsync(Student student)

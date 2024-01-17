@@ -4,13 +4,13 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
-using Contracts.Models;
-using Contracts.Repositories;
+using UniSmart.Contracts.Models;
+using UniSmart.Contracts.Repositories;
 using Npgsql;
-using Persistance;
+using UniSmart.Persistance;
 using UniSmart.Contracts.Services;
 
-namespace Service
+namespace UniSmart.Service
 {
     public class StudentService : IStudentService
     {

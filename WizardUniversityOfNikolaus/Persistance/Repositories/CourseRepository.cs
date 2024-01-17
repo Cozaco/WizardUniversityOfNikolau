@@ -1,15 +1,15 @@
-﻿using Contracts.Models;
-using Contracts.Repositories;
+﻿using UniSmart.Contracts.Models;
+using UniSmart.Contracts.Repositories;
 using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UniSmart.Contracts.Repositories;
+
 using UniSmart.Contracts.Services;
 
-namespace Persistance.Repositories
+namespace UniSmart.Persistance.Repositories
 {
     public class CourseRepository :ICourseRepository
     {

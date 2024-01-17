@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contracts.Models
+namespace UniSmart.Contracts.Models
 {
     public class Course
     {

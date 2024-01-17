@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace UniSmart.Contracts.Exceptions
 {
-    public class NotFoundException : ExpectedException
+    public class UnauthorizedException : ExpectedException
     {
-        public override int Code => 404;
+        public override int Code => 401;
 
-        public NotFoundException(string message):base(message)
+        public UnauthorizedException(string message):base(message)
         {
 
         }

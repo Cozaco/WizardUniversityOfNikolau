@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Contracts.Models;
-using Service; // es todo service lo que hay q importar? O podemos solo llamar a student service? por que a cualquier de las 2 posibilidades
-using System.Net.Cache;
-using UniSmart.API.InterfaceControllers;
-using UniSmart.Service;
+using UniSmart.Contracts.Models;
 using UniSmart.API.DTOs.Responses;
 using UniSmart.API.DTOs.Requests;
 using UniSmart.Contracts.Services;
@@ -11,7 +7,7 @@ using UniSmart.Contracts.Services;
 namespace UniSmart.API.Controllers
 {
     [ApiController]
-    [Route("professors")]
+    [Route("/api/professors")]
     public class ProfessorsController : ControllerBase
     {
         public IProfessorService professorService;

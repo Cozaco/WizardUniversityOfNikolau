@@ -1,21 +1,23 @@
-﻿using Contracts.Models;
-using Contracts.Repositories;
+﻿using UniSmart.Contracts.Models;
+using UniSmart.Contracts.Repositories;
 using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UniSmart.Contracts.Exceptions;
 
-namespace Persistance.Repositories
+
+namespace UniSmart.Persistance.Repositories
 {
     public class ProfessorRepository : IProfessorRepository
     {
         public NpgsqlDataSource dataSource;
 
-        public ProfessorRepository(NpgsqlDataSource dataSource)
+        public ProfessorRepository(IDataSource dataSource)
         {
-            this.dataSource = dataSource;
+            this.dataSource = dataSource.GetConnection();
         }
 
         public async Task<Professor> CreateAsync(Professor professor)
@@ -201,6 +203,33 @@ namespace Persistance.Repositories
             }
             Professor professor = new Professor(reader.GetString(1), reader.GetInt32(2), reader.GetInt32(0));
             return professor;
+        }
+        public async Task<bool> CheckPasswordAsync(string user, string passwordToCheck)
+        {
+            await using NpgsqlCommand command = dataSource.CreateCommand($"SELECT profesores.mail " +
+                                                                         $"FROM universidadnikolay.profesores " +
+                                                                         $"WHERE profesores.mail={user} " +
+                                                                         $"RETURNING id");
+            int? id = (int?)await command.ExecuteScalarAsync();//TODO Preguntar como hago para diferenciar si me da null porque no se pudo hacer la query o porque no existía el mail?
+            if (id == null)
+            {
+                throw new NotFoundException();
+            }
+
+            await using NpgsqlCommand command2 = dataSource.CreateCommand($"SELECT password " +
+                                                                          $"FROM universidadnikolay.profesores_password " +
+                                                                          $"WHERE profesores_id={id} " +
+                                                                          $"RETURNING password");
+            string? password = (string?)await command.ExecuteScalarAsync();
+            if (password == null)
+            {
+                throw new CantDoQueryException();
+            }
+            if (password == passwordToCheck)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

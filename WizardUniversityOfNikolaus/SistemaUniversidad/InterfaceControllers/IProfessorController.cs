@@ -1,4 +1,4 @@
-﻿using Contracts.Models;
+﻿using UniSmart.Contracts.Models;
 using Microsoft.AspNetCore.Mvc;
 using UniSmart.API.DTOs.Responses;
 

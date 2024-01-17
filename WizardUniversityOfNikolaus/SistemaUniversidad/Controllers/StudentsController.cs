@@ -1,4 +1,4 @@
-﻿using Contracts.Models;
+﻿using UniSmart.Contracts.Models;
 using Microsoft.AspNetCore.Mvc;
 using UniSmart.API.DTOs.Responses;
 using UniSmart.API.DTOs.Requests;
@@ -8,7 +8,7 @@ using UniSmart.Contracts.Services;
 namespace UniSmart.API.Controllers
 {
     [ApiController]
-    [Route("students")]
+    [Route("/api/students")]
     public class StudentsController : ControllerBase
     {
         public IStudentService studentService;

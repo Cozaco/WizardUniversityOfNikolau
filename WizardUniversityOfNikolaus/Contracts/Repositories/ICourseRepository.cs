@@ -1,4 +1,4 @@
-﻿using Contracts.Models;
+﻿using UniSmart.Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UniSmart.Contracts.Repositories;
 
-namespace Contracts.Repositories
+namespace UniSmart.Contracts.Repositories
 {
     public interface ICourseRepository /*: IRepository<Course>*/
     {
